@@ -1,20 +1,156 @@
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline" class="color-default"></ion-icon>
+      <ion-label class="color-default">Home</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab2">
-      <ion-icon name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
+      <ion-icon name="phone-portrait-outline" class="color-default"></ion-icon>
+      <ion-label class="color-default">Camera</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3">
-      <ion-icon name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+      <ion-icon name="person-outline" class="color-default"></ion-icon>
+      <ion-label class="color-default">Profile</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 
 </ion-tabs>
+
+
+<!-- home view -->
+
+<!-- <ion-content [fullscreen]="true" id="content">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" class="ion-refresh bg-dark">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div id="category" class="bg-dark">
+    <div class="category-body">
+      <div class="category-btn">
+        <label >
+          <p class="icon"><i class="icon-genre"></i></p>
+          <span class="category-name">Populer</span>
+        </label>
+      </div>
+      <div class="category-btn" (click)="dropgenre()">
+        <label >
+          <input type="checkbox" id="genre-checkbox" class="hide">
+          <p class="icon"><i class="icon-genre"></i></p>
+          <span class="category-name">Genre</span>
+        </label>
+      </div>
+      <div class="category-btn" (click)="dropcountry()">
+        <label >
+          <input type="checkbox" id="country-checkbox" class="hide">
+          <p class="icon"><i class="icon-genre"></i></p>
+          <span class="category-name">Country</span>
+        </label>
+      </div>
+      <div class="category-btn" (click)="dropyears()">
+        <label >
+          <input type="checkbox" id="years-checkbox" class="hide">
+          <p class="icon"><i class="icon-genre"></i></p>
+          <span class="category-name">Years</span>
+        </label>
+      </div>
+    </div>
+    <div class="dropdown-category" id="genre-drop">
+      <ul class="dropdown-menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Comedy</a></li>
+        <li><a href="#">Romance</a></li>
+        <li><a href="#">Horror</a></li>
+        <li><a href="#">Mystery</a></li>
+        <li><a href="#">Drama</a></li>
+      </ul>
+    </div>
+    <div class="dropdown-category" id="country-drop">
+      <ul class="dropdown-menu">
+        <li><a href="#">America</a></li>
+        <li><a href="#">China</a></li>
+        <li><a href="#">India</a></li>
+        <li><a href="#">Indonesia</a></li>
+        <li><a href="#">Korea</a></li>
+        <li><a href="#">Jepang</a></li>
+        <li><a href="#">Thailand</a></li>
+        <li><a href="#">Hongkong</a></li>
+        <li><a href="#">more..</a></li>
+      </ul>
+    </div>
+    <div class="dropdown-category" id="years-drop">
+      <ul class="dropdown-menu">
+        <li><a href="#">2000</a></li>
+        <li><a href="#">2001</a></li>
+        <li><a href="#">2002</a></li>
+        <li><a href="#">2003</a></li>
+        <li><a href="#">2004</a></li>
+        <li><a href="#">2005</a></li>
+        <li><a href="#">2006</a></li>
+        <li><a href="#">2007</a></li>
+        <li><a href="#">2008</a></li>
+        <li><a href="#">2008</a></li>
+        <li><a href="#">2010</a></li>
+        <li><a href="#">2011</a></li>
+        <li><a href="#">2012</a></li>
+        <li><a href="#">2013</a></li>
+        <li><a href="#">2014</a></li>
+        <li><a href="#">2015</a></li>
+        <li><a href="#">2016</a></li>
+        <li><a href="#">2017</a></li>
+        <li><a href="#">2018</a></li>
+        <li><a href="#">2019</a></li>
+        <li><a href="#">2020</a></li>
+      </ul>
+    </div>
+  </div>
+  <div id="container" class="bg-dark">
+    <div id="loader">
+      <div>
+      <ion-grid class="grid">
+        <ion-row>
+          <ion-col size="4" *ngFor="let key of loaderCount">
+            <div class="animate-large animate-loader"></div>
+            <div class="animate-quality animate-loader-small"></div>
+            <div class="animate-rating-duration animate-loader-small"></div>
+            <div class="animate-title animate-loader-small"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </div>
+    </div>
+      <div id="movie-list">
+        <ion-card class="card bg-dark">
+          <ion-grid >
+            <ion-row id="movie-list-content">
+              <ion-col size="4" *ngFor="let item of data">
+                <ion-card class="card-body">
+                  <div class="rating-duration">
+                    <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+                    <span class="rating">{{ (item.rating) ? item.rating : '-' }}</span>
+                    <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+                    <span class="rating">{{ (item.runtime) ? item.runtime : '-' }}</span>
+                  </div>
+                  <span class="mv-quality {{ item.quality.split(' ')[0].toLowerCase() }}">{{ item.quality.split(' ')[0] }}</span>
+                  <img src="{{ item.poster }}" alt="">
+                  <span class="movie-info">
+                    <ion-card-title class="card-title">{{ item.title }} ({{ item.year }})</ion-card-title>
+                  </span>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          
+          <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event,movie_pages)">
+            <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+        
+      </ion-card>
+    </div>
+  </div>
+</ion-content> -->
