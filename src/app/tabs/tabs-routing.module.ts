@@ -4,11 +4,11 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'home',
+        path: 'movie',
         children: [
           {
             path: '',
@@ -18,35 +18,55 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'drama',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+              import('../drama/drama.module').then(m => m.DramaPageModule)
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'anime',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+              import('../anime/anime.module').then(m => m.AnimePageModule)
+          }
+        ]
+      },
+      {
+        path: 'favorit',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../favorit/favorit.module').then(m => m.FavoritPageModule)
+          }
+        ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../profile/profile.module').then(m => m.ProfilePageModule)
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/home',
+        redirectTo: '',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '',
     pathMatch: 'full'
   }
 ];

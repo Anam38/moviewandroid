@@ -1,0 +1,77 @@
+
+<ion-content [fullscreen]="true">
+  <!-- header -->
+  <ion-header [translucent]="true" class="header bg-dark">
+    <ion-toolbar>
+      <ion-title>Profile</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- end header -->
+  <div>
+    <ion-card class="card-body-grid card-body-grid-img" id="movie-card">
+      <img src="../../assets/img/Sunflowers.jpg" alt="">
+      <div class="img-profile">
+        <img src="../../assets/img/Sunflowers.jpg" alt="">
+        <div class="btn-change">
+          <ion-icon name="share-outline" class="color-second"></ion-icon>
+        </div>
+      </div>
+      <div class="movie-info">
+        <ion-card-title class="card-title card-title-d">Sun Flowers</ion-card-title>
+      </div>
+    </ion-card>
+    <div class='tabs'>
+      <input type='radio' id='about' name='t' checked>
+      <label for='about'>About</label>
+      <div class='content'>About :
+        <form action="#" style="max-width:500px;margin:auto;padding-top:15px;">
+          <div class="input-container">
+            <i class="fa fa-user icon"><ion-icon name="person"></ion-icon></i>
+            <input class="input-field" type="text" placeholder="Username" name="usrnm">
+          </div>
+        
+          <div class="input-container">
+            <i class="fa fa-envelope icon"><ion-icon name="mail-unread"></ion-icon></i>
+            <input class="input-field" type="text" placeholder="Email" name="email">
+          </div>
+          
+          <div class="input-container">
+            <i class="fa fa-key icon"><ion-icon name="lock-open"></ion-icon></i>
+            <input class="input-field" type="password" placeholder="Password" name="psw">
+          </div>
+        
+          <button type="submit" class="btn">Update</button>
+        </form>
+      </div>
+      <input type='radio' id='history' name='t'>
+      <label for='history'>History</label>
+      <div class='content'>History Watch
+        <div style="margin: 10px -10px 35px;">
+          <ion-row>
+            <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
+              <div class="animate-large animate-loader"></div>
+              <div class="animate-quality animate-loader-small"></div>
+              <div class="animate-rating-duration animate-loader-small"></div>
+              <div class="animate-title animate-loader-small"></div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <input type='radio' id='favorite' name='t'>
+      <label for='favorite'>Favorite Movie</label>
+      <div class='content background-second'>Favorite
+        <div style="margin: 10px -10px 35px;">
+          <ion-row>
+            <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
+              <div class="animate-large animate-loader"></div>
+              <div class="animate-quality animate-loader-small"></div>
+              <div class="animate-rating-duration animate-loader-small"></div>
+              <div class="animate-title animate-loader-small"></div>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+      <div id='slider'></div>
+    </div>
+  </div>
+</ion-content>

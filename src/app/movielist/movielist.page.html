@@ -1,0 +1,59 @@
+<ion-content color="yellow">
+<ion-header class="bg-dark">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<!-- content -->
+<div class="content">
+  <div id="category" class="bg-dark">
+    <div class="category-body">
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Action</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Romance</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Comedy</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Horor</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div id="movie-list">
+    <ion-grid class="grid">
+      <ion-row id="movie-list-content">
+        <ion-col size="4" *ngFor="let item of [1,2,3,4,5,6]">
+          <ion-card class="card-body-grid">
+            <div class="rating-duration">
+              <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+              <span class="rating">99</span>
+              <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+              <span class="rating">99 min</span>
+            </div>
+            <span class="mv-quality hd">HD</span>
+            <img src="http://198.54.124.245/wp-content/uploads/2020/02/yHhBfL2msdFWwLpjGSgPJpVmxQN.jpg" alt="">
+            <span class="movie-info">
+              <ion-card-title class="card-title">The Boy (2020)</ion-card-title>
+            </span>
+          </ion-card>   
+        </ion-col>
+      </ion-row>
+    </ion-grid>      
+  </div>
+</div>
+<!-- end content -->
+</ion-content>

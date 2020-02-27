@@ -14,7 +14,7 @@ export const URL_API_TMDB = 'https://api.themoviedb.org/3/movie/';
 export const URL_IMG_TMDB = 'https://image.tmdb.org/t/p/original';
 
 // config for gdriveplayer api
-export const URL_API_GDPLA_MOVIE = 'https://api.gdriveplayer.us/v1/movie/';
+export const URL_API_GDPLA_MOVIE = 'https://api.gdriveplayer.us/v1/';
 
 
 /*

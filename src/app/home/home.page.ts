@@ -1,54 +1,97 @@
-import { Component, ViewChild  } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+
+// API Provider
+import { ApiProviderService } from '../api-provider.service';
 
 import { environment, API_KEY_TMDB, URL_API_TMDB, URL_IMG_TMDB, URL_API_GDPLA_MOVIE } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
+  styleUrls: ['../../assets/scss/main.scss']
 })
 export class HomePage {
 
-  data : object;
-  loaderCount : any[];
-  movie_pages : string;
+  // variabel
+  playNow : object;
+  soon    : object;
+  populer : object;
   
+  loaderCount : any[];
+
+  movie_pages : string;
+  url_img     : string;
+  
+
   constructor(
     public navCtrl: NavController,
-    public http: HttpClient  
+    public http: HttpClient,
+    public router: Router,
+    public apiprovider : ApiProviderService 
     ) {
-      this.loaderCount = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];      
-      // this.movieplayingnow();
+      this.url_img = URL_IMG_TMDB;
 
-    }
-
-    doRefresh(event) {
-      console.log('Begin async operation');
-      setTimeout(() => {
-        console.log('Async operation has ended');
-        // this.movieplayingnow()
-        event.target.complete();
-      }, 2000);
-    }
+      this.loaderCount = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
     
-  //   movieplayingnow(){
-  //     this.http.get(URL_API_GDPLA_MOVIE+'newest?page=1')
-  //     .subscribe(
-  //       resdata => {
-  //         this.data = resdata;
-  //         this.movie_pages = '1';
-  //         console.log(resdata);
+      this.movieplayingnow();
+      this.soonmovie();
+      
+    }
+
+    public movieDetail(param) {
+      
+      var title = param[0];
+      var movieID = param[1];
+      
+      for (var _i = 0; _i < param[0].length; _i++) {
+        title = title.replace(" ", "-");
+      }
+      
+      this.apiprovider.param = movieID
+
+      this.router.navigate([title]);
+  }
+
+    // doRefresh(event) {
+    //   console.log('Begin async operation');
+    //   setTimeout(() => {
+    //     console.log('Async operation has ended');
+    //     // this.movieplayingnow()
+    //     event.target.complete();
+    //   }, 2000);
+    // }
+    
+    // data api play now
+    movieplayingnow(){
+      this.apiprovider.moviewApiUrl('playnow')
+      .subscribe(
+        resdata => {
+          this.playNow = resdata;
+          this.movie_pages = '1';
           
-  //         setTimeout(function(){
-  //             document.getElementById('loader').hidden = true;
-  //             console.log(resdata)
-  //         },1000);
-  //       },err=> {
-  //         console.log('error');
-  //     });
-  //   }
+          // setTimeout(function(){
+            //     document.getElementById('loader').hidden = true;
+                console.log(resdata)
+            // },1000);
+            
+          },err=> {
+            console.log('error');
+          });
+        }
+        
+    soonmovie() {
+          this.apiprovider.moviewApiUrl('soon')
+          .subscribe(
+            resdata => {
+              this.soon = [1];
+        },err=> {
+          console.log('error');
+      });
+    }
 
   //   movienextpage(page){
 

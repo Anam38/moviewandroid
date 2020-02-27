@@ -9,9 +9,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
+
+// API provider
+import { ApiProviderService } from './api-provider.service';
 
 @NgModule({
   declarations: [
@@ -23,14 +25,14 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule, 
     HttpClientModule,
-    IonicModule.forRoot(), 
-    IonicStorageModule.forRoot(),
+    IonicModule.forRoot(),
     AppRoutingModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ApiProviderService
   ],
   bootstrap: [AppComponent]
 })

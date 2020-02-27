@@ -1,0 +1,118 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+      </ion-buttons>
+      <!-- <ion-title>Detail</ion-title> -->
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="body" *ngFor="let item of movieDetail">
+    <div id="video-play">
+      <div class="footer-video">
+        <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
+      </div>
+    </div>
+    <ion-card class="card-body-grid card-body-grid-img" id="movie-card">
+      <img src="{{ item.Poster }}" alt="">
+      <div class="btn-play" (click)="playvideo(item.imdbID)">
+        <ion-icon name="play-circle-sharp" class="icon-size-70 color-default"></ion-icon>
+      </div>
+      <div class="movie-info">
+        <div class="movie-rating">
+          <div>
+            <ion-icon name="star" color="warning" class="icon-size-15" *ngFor="let item of [1,2,3,4,5]"></ion-icon>
+            <p class="text-rating">Rating</p>
+          </div>
+            <p class="rating-detail">{{ item.imdbRating }}</p>
+        </div>
+        <ion-card-title class="card-title card-title-d">{{ item.Title }} ({{ item.Year }})</ion-card-title>
+        <div class="movie-duration-genre">
+          <ion-icon name="time" color="warning" class="icon-size-13"></ion-icon>
+          <p class="duration-detail">{{ item.Runtime }}</p>
+            <div class="genre-btn-detail" *ngFor="let index of item.Genre.split(',')">
+              <label >
+                <span class="category-name">{{ index }}</span>
+              </label>
+            </div>
+        </div>
+        <div class="like">
+          <ion-icon name="heart-outline" class="icon-size-20" ></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <div class="detail-body">
+      <ion-card class="card-body-grid bg-dark">
+        <span class="color-abu">Plot :</span>
+        <p class="color-white icon-size-12">
+          {{ item.Plot }}
+        </p>
+        <a class="btn btn-icon btn-defauld" href="#"><i><ion-icon name="play-circle-sharp" class="icon-size-20"></ion-icon></i><span>Trailer</span></a>
+        <a class="btn btn-icon btn-defauld" href="#"><i><ion-icon name="star" class="icon-size-20"></ion-icon></i><span>Rate Movie</span></a>
+      </ion-card>
+      <div class="background-second padding-10 box-about-movie">
+        <span class="color-abu">About Movie :</span>
+        <table class="table-about-movie color-abu icon-size-13">
+          <tbody>
+            <tr>
+              <td>Director</td>
+              <td>{{ (item.Director) ? item.Director : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Writer</td>
+              <td>{{ (item.Writer) ? item.Writer : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>{{ (item.Language) ? item.Language : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>{{ (item.Country) ? item.Country : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td>{{ (item.Type) ? item.Type : '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div> 
+      <ion-row>
+        <span class="color-abu">Actor :</span>
+      </ion-row>
+      <div id="category" class="bg-dark">
+        <div class="category-body">
+          <div class="genre-btn-actor" *ngFor="let index of item.Actors.split(',')">
+            <label >
+              <span class="category-name">{{ index }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+        <ion-row>
+          <h2 class="content-title">Recomendet</h2>
+          <span class="content-title-right">more</span>
+        </ion-row>
+        <ion-row>
+          <div class="content-body">
+            <ion-card class="card-body" *ngFor="let item of [1,2,3,4]">
+              <div class="rating-duration">
+                <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+                <span class="rating">99</span>
+                <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+                <span class="rating">99 min</span>
+              </div>
+              <span class="mv-quality hd">HD</span>
+              <img src="http://198.54.124.245/wp-content/uploads/2020/02/yHhBfL2msdFWwLpjGSgPJpVmxQN.jpg" alt="">
+              <span class="movie-info">
+                <ion-card-title class="card-title icon-size-12">The Boy (2020)</ion-card-title>
+              </span>
+            </ion-card>   
+          </div>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>

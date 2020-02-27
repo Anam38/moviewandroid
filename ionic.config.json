@@ -1,5 +1,13 @@
 {
   "name": "movieApp",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/login",
+      "proxyUrl": "http://remotecould.site/login"
+    }
+  ]
 }
