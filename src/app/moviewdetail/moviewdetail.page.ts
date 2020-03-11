@@ -75,6 +75,7 @@ export class MoviewdetailPage implements OnInit {
     this.movieId = JSON.stringify(this.apiprovider.ID);
     this.detailmovie(this.movieId);
   }
+  
   // on scroll down
   onScroll(event) {
     if(event.detail.scrollTop > 0){
