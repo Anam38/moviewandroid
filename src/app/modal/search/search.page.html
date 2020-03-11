@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" [ngStyle]="{'padding': '0'}">
+        <form class="search">
+          <input id="search" class="basic-slide" type="text" name="search" placeholder="Search Movie" (click)="focusInput()" [(ngModel)]="newSearchItem.keyword" (keyup.enter)="searching()" autofocus />
+          <label><ion-icon name="search"></ion-icon></label>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-buttons slot="end" >
+    <ion-button color="light" (click)="dismissModal()">Cancel</ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list id="history-search">
+    <ion-item>
+      <p id="cancel-seach" slot="start" style="color: #ffffff;font-weight: 600;">Last Searching</p>
+      <p slot="end" style="color: #eb445a;" (click)="DeleteAll('search')">Clear All</p>
+    </ion-item>
+    <!-- looping item history searching -->
+    <div class="search-item">
+      <ion-item *ngFor="let item of searchItem">
+        <ion-label (click)="searching(item.keyword)" >{{ item.keyword }}</ion-label>
+        <ion-icon name="close-outline" slot="end" color="medium" (click)="DeleteSearch(item)"></ion-icon>
+      </ion-item>
+    </div>
+      <!-- end looping -->
+  </ion-list>
+  <!-- List of result searching -->
+    <ion-list class="result hide" id="result-search" style="padding: 0px;">
+      <!-- looping item history searching -->
+      <div class="search-item" *ngIf="resultSearch; else saleitem">
+        <ion-item style="height: auto!important;" *ngFor="let item of resultSearch"  (click)="movieDetail([item.title, item.imdb])">
+          <ion-grid style="padding:0px;">
+            <ion-row>
+              <ion-col size="2">
+                <img src="{{ item.poster }}" alt="" style="height: 80px;">
+              </ion-col>
+              <ion-col size="9">
+                <ion-label style="padding:5px 10px;font-weight: 600;font-size: 15px;">{{ item.title }}</ion-label>
+                <ion-label style="padding:5px 10px;font-size: 11px;">{{ item.rating }}</ion-label>
+                <ion-label style="padding:5px 10px;font-size: 11px;">{{ item.country }}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </div>
+      <ng-template #saleitem>
+        <ion-item>
+          <p style="font-weight: 600;width: 100%;text-align: center;">Movie not Found</p>
+        </ion-item>
+      </ng-template> 
+        <!-- end looping -->
+  </ion-list>
+</ion-content>

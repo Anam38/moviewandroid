@@ -1,11 +1,12 @@
-ion-card-title{
-    top: 35px !important;
-    font-size: 15px !important;
+
+.card-title-d{
+  top: 35px !important;
+  font-size: 15px !important;
 }
 .header{
     height: 0px;
 }
-.card-body-grid{
+.card-body-grid-head{
     margin: 0px;
     height: 350px;
 }
@@ -70,7 +71,7 @@ $size: 88px;
     top: -20px; right: 0; left: 0;
     background-color: #222225;
     color: #aaa;
-    padding: 20px;
+    padding: 10px;
     display: none;
   }
   
@@ -80,19 +81,19 @@ $size: 88px;
     border-bottom: 2px solid #ffc372;
     margin: 7px 10px;
     transition: transform 0.5s;
-    width: 125px;
+    width: 33.3%;
   }
   
   [type=radio],#about:checked ~ #slider {
-    transform: translate(-385px, 0px);
+    transform: translate(-310%, 0px);
   }
   
   [type=radio],#history:checked ~ #slider {
-    transform: translate(-260px, 0px);
+    transform: translate(-210%, 0px);
   }
   
   [type=radio],#favorite:checked ~ #slider {
-    transform: translate(-135px, 0px);
+    transform: translate(-108%, 0px);
   }
   
   [type=radio]:checked + label {

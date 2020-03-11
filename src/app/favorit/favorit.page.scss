@@ -31,8 +31,9 @@
     top: -20px; right: 0; left: 0; bottom: 0px;
     background-color: #222225;
     color: #aaa;
-    padding: 20px;
+    padding: 10px;
     display: none;
+    height: fit-content;
   }
   
   #slider {
@@ -41,19 +42,19 @@
     border-bottom: 2px solid #ffc372;
     margin: 7px 10px;
     transition: transform 0.5s;
-    width: 125px;
+    width: 33.3%;
   }
   
   [type=radio],#movie:checked ~ #slider {
-    transform: translate(-385px, 0px);
+    transform: translate(-310%, 0px);
   }
   
   [type=radio],#drama:checked ~ #slider {
-    transform: translate(-260px, 0px);
+    transform: translate(-210%, 0px);
   }
   
   [type=radio],#anime:checked ~ #slider {
-    transform: translate(-135px, 0px);
+    transform: translate(-108%, 0px);
   }
   
   [type=radio]:checked + label {
@@ -84,4 +85,15 @@
   }
   ion-slide:nth-child(3) {
     background: red;
+  }
+  ::ng-deep .action-sheet-style-buttons{
+    --color: azure !important;
+    background-color: #171719 !important;
+  }
+  ::ng-deep .action-sheet-style-buttons span{
+    margin-right: 15px;
+    color: azure;
+  }
+  ::ng-deep .action-sheet-style-buttons span ion-icon{
+    margin-right: 15px !important;
   }

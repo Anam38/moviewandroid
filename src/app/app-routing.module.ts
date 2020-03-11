@@ -8,20 +8,24 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'movie:param',
+    path: 'more/:param',
     loadChildren: () => import('./movielist/movielist.module').then( m => m.MovielistPageModule)
   },
   {
-    path: ':movieId',
+    path: 'movie/:movieId',
     loadChildren: () => import('./moviewdetail/moviewdetail.module').then( m => m.MoviewdetailPageModule)
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+    path: 'search',
+    loadChildren: () => import('./modal/search/search.module').then( m => m.SearchPageModule)
   },
   {
-    path: 'favorit',
-    loadChildren: () => import('./favorit/favorit.module').then( m => m.FavoritPageModule)
+    path: 'category',
+    loadChildren: () => import('./modal/category/category.module').then( m => m.CategoryPageModule)
+  },
+  {
+    path: 'result',
+    loadChildren: () => import('./modal/result/result.module').then( m => m.ResultPageModule)
   }
 ];
 @NgModule({

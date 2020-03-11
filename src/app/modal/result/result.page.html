@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"  (click)="dismissModal()"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center">Result</ion-title>
+    <ion-buttons slot="end" class="color-default" (click)="SearchModal()">
+      <ion-icon name="search" class="icon-size-20 padding-15"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+  <!-- loader -->
+  <div id="loader-result">
+    <ion-row>
+      <ion-col size="4" *ngFor="let key of loaderCount">
+        <div class="animate-large animate-loader"></div>
+        <div class="animate-quality animate-loader-small"></div>
+        <div class="animate-rating-duration animate-loader-small"></div>
+        <div class="animate-title animate-loader-small"></div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--end loader -->
+    <ion-grid class="grid">
+      <ion-row id="movie-list-content" *ngIf="dataResults; else saleitem">
+        <ion-col size="4" *ngFor="let item of dataResults" (click)="movieDetail([item.title, item.imdb])">
+          <ion-card class="card-body-grid">
+            <div class="rating-duration">
+              <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+              <span class="rating">{{ (item.rating) ? item.rating : '-' }}</span>
+              <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+              <span class="rating">{{ (item.runtime) ? item.runtime : '-' }}</span>
+            </div>
+            <span class="mv-quality {{ item.quality.split(' ')[0].toLowerCase() }}">{{ item.quality.split(' ')[0] }}</span>
+            <img src="{{ item.poster }}" alt="">
+            <span class="movie-info">
+              <ion-card-title class="card-title">{{ item.title }} ({{ item.year }})</ion-card-title>
+            </span>
+          </ion-card>   
+        </ion-col>
+      </ion-row>
+      <ng-template #saleitem>
+        <ion-item>
+          <p style="font-weight: 600;width: 100%;text-align: center;">Movie not Found</p>
+        </ion-item>
+      </ng-template> 
+    </ion-grid>      
+  </div>
+</ion-content>

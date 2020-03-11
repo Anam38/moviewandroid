@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"  (click)="dismissModal()"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center">Category</ion-title>
+    <ion-buttons slot="end" class="color-default" (click)="SearchModal()">
+      <ion-icon name="search" class="icon-size-20 padding-15"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="genre" *ngIf="category == 'genre'">
+    <ion-list class="category-title">
+      <ion-item>
+        <p slot="start" style="color: #ffffff;font-weight: 600;">Genre</p>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of categoryList" (click)="result(['genre',item.toLowerCase()])">
+          <div class="genre-btn-detail">
+            <label >
+              <span class="category-name center">{{ item }}</span>
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div id="country" *ngIf="category == 'country'">
+    <ion-list class="category-title">
+      <ion-item>
+        <p slot="start" style="color: #ffffff;font-weight: 600;">Country</p>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of CountryList" (click)="result(['country',item.toLowerCase()])">
+          <div class="genre-btn-detail">
+            <label >
+              <span class="category-name center">{{ item }}</span>
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div id="year" *ngIf="category == 'year'">
+    <ion-list class="category-title">
+      <ion-item>
+        <p slot="start" style="color: #ffffff;font-weight: 600;">years</p>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3" *ngFor="let item of YearsList" (click)="result(['year',item])">
+          <div class="genre-btn-detail">
+            <label >
+              <span class="category-name center">{{ item }}</span>
+            </label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  </ion-content>

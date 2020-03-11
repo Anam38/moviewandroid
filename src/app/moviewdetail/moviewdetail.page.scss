@@ -1,9 +1,18 @@
+ion-toolbar{
+    background: transparent;
+}
 ion-card{
     border-radius: 0px;
     height: auto !important;
 }
+ion-header{
+    height: 45px;
+}
 tr{
     width: 20%;
+}
+p{
+    margin: 10px 0px 15px;
 }
 iframe{
     width: 100%;
@@ -17,14 +26,22 @@ iframe{
 }
 .footer-video{
     background: #39393f;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.59);
+}
+.card-body-grids{
+    margin: 0px;
+    height: 167px;
 }
 .card-body-grid-img, img{
     height: 100%;
+    background: #39393f;
+    display: block;
+    margin: auto;
 }
 .card-body-grid-img{
     height: 560px !important;
 }
-.movie-info{
+.card-body-grid-img .movie-info{
     bottom: -12px;
 }
 .detail-body{
@@ -77,8 +94,8 @@ iframe{
 }
 .like{
     position: absolute;
-    right: 15px;
-    bottom: 25px;
+    right: 10px;
+    bottom: 20px;
 }
 .movie-desc{
     height: 20px;
@@ -90,6 +107,42 @@ iframe{
     width: 100%;
     height: 100%;
 }
+.play-movie{
+    width: 80px;
+    margin: auto;
+    border-radius: 50px;
+    box-shadow: 0 1px 25px 3px #ffc372;
+    height: 80px;
+    position: relative;
+    bottom: 10px;
+    background: rgba(251, 192, 111, 0.88);
+}
+.play-movie ion-icon{
+    margin: -10px;
+    color: white;
+}
+.btn-trailer{
+    background: rgba(255, 195, 114, 0.83);
+    height: 40px;
+    width: 90px;
+    margin: auto;
+    border: 3px solid white;
+    box-shadow: 0 1px 20px 3px #ffc372;
+    border-radius: 5px;
+    padding: 9px 0px;
+}
+
+.btn-trailer p{
+    display: inline;
+    margin: 0px 0px 0px 10px;
+    font-weight: bold;
+    color: white;
+}
+.btn-trailer ion-icon{
+    margin: -5px;
+    font-size: 20px;
+    color: white;
+}
 .table-about-movie {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -99,6 +152,7 @@ iframe{
   
   .table-about-movie td, .table-about-movie th {
     padding: 3px 0px;
+    width: 1px;
   }
   
 //   .table-about-movie tr:nth-child(even){background-color: #f2f2f2;}
@@ -130,8 +184,11 @@ iframe{
     padding: 5px 5px;
   }
   .frame-title{
-    margin: 0px 0px 5px;
+    margin: 0px 0px 0px;
     color: white;
     font-size: 20px;
-    padding: 5px 15px;
+    padding: 10px 15px;
+  }
+  .radius{
+      border-radius: 5px!important;
   }

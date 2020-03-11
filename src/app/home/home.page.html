@@ -1,23 +1,29 @@
 
+<!-- header -->
+<ion-header [translucent]="true" class="header bg-dark">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" [ngStyle]="{'padding': '0'}">
+      </ion-col>
+      <ion-col size="8" [ngStyle]="{'padding': '0'}">
+          <form class="search">
+            <input id="search" class="basic-slide" type="text" name="search" placeholder="Search Movie" (click)="SearchModal()"/>
+            <label><ion-icon name="search"></ion-icon></label>
+          </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+<!-- end header -->
+
 <ion-content [fullscreen]="true" id="content" class="bg-dark">
-  <!-- header -->
-  <ion-header [translucent]="true" class="header bg-dark">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="4" [ngStyle]="{'padding': '0'}">
-        </ion-col>
-        <ion-col size="8" [ngStyle]="{'padding': '0'}">
-          <span>
-            <input class="basic-slide" id="name" type="text" placeholder="Search Movie" />
-            <label for="name"><ion-icon name="search"></ion-icon></label>
-          </span>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-header>
-  <!-- end header -->
-  <!-- content  -->
   
+  <!-- refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" class="ion-refresh">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- content  -->
   <div class="content">
     <!-- loader -->
     <div id="loader">
@@ -73,51 +79,30 @@
       </div>
     </div>
     <!-- end loader -->
-    <div id="category" class="bg-dark">
-      <div class="category-body">
-        <div class="category-btn">
-          <label >
-            <span class="category-name">Populer</span>
-          </label>
+    <!-- slider -->
+    <!-- <ion-slides>
+
+      <ion-slide>
+        <div class="slide">
+          <img src="https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=3Ywyhk_0NUsshrH00"/>
+          
         </div>
-        <div class="category-btn">
-          <label >
-            <span class="category-name">Genre</span>
-          </label>
-        </div>
-        <div class="category-btn">
-          <label >
-            <span class="category-name">Country</span>
-          </label>
-        </div>
-        <div class="category-btn">
-          <label >
-            <span class="category-name">Years</span>
-          </label>
-        </div>
-      </div>
-    </div>
-    <ion-row>
-      <h2 class="content-title">Populer</h2>
-      <span class="content-title-right" routerLink="/movielist/populer">more</span>
-    </ion-row>
-    <ion-row>
-      <div class="content-body">
-        <ion-card class="card-body" *ngFor="let item of [1,2,3,4]">
-          <div class="rating-duration">
-            <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
-            <span class="rating">99</span>
-            <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
-            <span class="rating">99 min</span>
-          </div>
-          <span class="mv-quality hd">HD</span>
-          <img src="http://198.54.124.245/wp-content/uploads/2020/02/yHhBfL2msdFWwLpjGSgPJpVmxQN.jpg" alt="">
-          <span class="movie-info">
-            <ion-card-title class="card-title">The Boy (2020)</ion-card-title>
-          </span>
-        </ion-card>   
-      </div>
-    </ion-row>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=3Ywyhk_0NUsshrH00"/>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=3Ywyhk_0NUsshrH00"/>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="https://img.particlenews.com/image.php?type=thumbnail_1024x576&url=3Ywyhk_0NUsshrH00"/>
+      </ion-slide>
+
+    </ion-slides> -->
+    <!-- end slider -->
     <div id="category" class="bg-dark">
       <div class="category-body">
         <div class="category-btn-bg">
@@ -144,7 +129,6 @@
     </div>
     <ion-row>
       <h2 class="content-title">Soon</h2>
-      <!-- <span class="content-title-right">more</span> -->
     </ion-row>
     <ion-row>
       <div class="content-body">
@@ -156,9 +140,33 @@
         </ion-card>   
       </div>
     </ion-row>
+    <div id="category" class="bg-dark">
+      <div class="category-body">
+        <div class="category-btn">
+          <label >
+            <span class="category-name">Newest</span>
+          </label>
+        </div>
+        <div class="category-btn">
+          <label >
+            <span class="category-name" (click)="CategoryModal('genre')">Genre</span>
+          </label>
+        </div>
+        <div class="category-btn">
+          <label >
+            <span class="category-name" (click)="CategoryModal('country')">Country</span>
+          </label>
+        </div>
+        <div class="category-btn">
+          <label >
+            <span class="category-name" (click)="CategoryModal('year')">Years</span>
+          </label>
+        </div>
+      </div>
+    </div>
     <ion-row>
       <h2 class="content-title">Now playing</h2>
-      <span class="content-title-right" routerLink="/movielist/now-playing" >more</span>
+      <p class="content-title-right" (click)="moviemore('now-playing')" >more</p>
     </ion-row>
     <div id="movie-list">
         <ion-grid class="grid">
@@ -183,4 +191,11 @@
       </div>
   </div>
   <!-- end content -->
+  
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event,movie_pages)" id="loadMovie">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
 </ion-content>

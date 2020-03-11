@@ -1,23 +1,28 @@
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
-      </ion-buttons>
-      <!-- <ion-title>Detail</ion-title> -->
-    </ion-toolbar>
-  </ion-header>
+<!-- header -->
+<ion-header id="header">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+    </ion-buttons>
+</ion-header>
 
+<ion-content id="ion-content" (ionScroll)="onScroll($event)" [scrollEvents]="false">
   <div id="body" *ngFor="let item of movieDetail">
     <div id="video-play">
+      <iframe sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" id="frame-video" [src]="video_play(moviewPlayUrl)" style="width: 100%; display: block;border: 0px;margin: 30px 0px;" allowfullscreen></iframe>
       <div class="footer-video">
         <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
       </div>
     </div>
-    <ion-card class="card-body-grid card-body-grid-img" id="movie-card">
+    <ion-card class="card-body-grids card-body-grid-img" id="movie-card">
       <img src="{{ item.Poster }}" alt="">
       <div class="btn-play" (click)="playvideo(item.imdbID)">
-        <ion-icon name="play-circle-sharp" class="icon-size-70 color-default"></ion-icon>
+        <div class="play-movie">
+          <ion-icon name="caret-forward-circle-outline" class="icon-size-100"></ion-icon>
+        </div>
+        <div class="btn-trailer">
+          <ion-icon name="film-outline"></ion-icon>
+          <p>Trailer</p>
+        </div>
       </div>
       <div class="movie-info">
         <div class="movie-rating">
@@ -38,18 +43,16 @@
             </div>
         </div>
         <div class="like">
-          <ion-icon name="heart-outline" class="icon-size-20" ></ion-icon>
+          <ion-icon id="like" name="heart-sharp" class="icon-size-30" (click)="favorites($event,item.imdbID)"></ion-icon>
         </div>
       </div>
     </ion-card>
-    <div class="detail-body">
-      <ion-card class="card-body-grid bg-dark">
+    <div class="detail-body" id="detail-body">
+      <ion-card class="card-body-grids bg-dark">
         <span class="color-abu">Plot :</span>
         <p class="color-white icon-size-12">
           {{ item.Plot }}
         </p>
-        <a class="btn btn-icon btn-defauld" href="#"><i><ion-icon name="play-circle-sharp" class="icon-size-20"></ion-icon></i><span>Trailer</span></a>
-        <a class="btn btn-icon btn-defauld" href="#"><i><ion-icon name="star" class="icon-size-20"></ion-icon></i><span>Rate Movie</span></a>
       </ion-card>
       <div class="background-second padding-10 box-about-movie">
         <span class="color-abu">About Movie :</span>
@@ -78,14 +81,14 @@
           </tbody>
         </table>
       </div>
-      <div> 
+      <div style="margin-bottom: 10px;"> 
       <ion-row>
         <span class="color-abu">Actor :</span>
       </ion-row>
       <div id="category" class="bg-dark">
         <div class="category-body">
-          <div class="genre-btn-actor" *ngFor="let index of item.Actors.split(',')">
-            <label >
+          <div class="genre-btn-actor" *ngFor="let index of item.Actors.split(',')" >
+            <label>
               <span class="category-name">{{ index }}</span>
             </label>
           </div>
@@ -93,24 +96,33 @@
       </div>
         <ion-row>
           <h2 class="content-title">Recomendet</h2>
-          <span class="content-title-right">more</span>
         </ion-row>
         <ion-row>
-          <div class="content-body">
-            <ion-card class="card-body" *ngFor="let item of [1,2,3,4]">
-              <div class="rating-duration">
-                <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
-                <span class="rating">99</span>
-                <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
-                <span class="rating">99 min</span>
-              </div>
-              <span class="mv-quality hd">HD</span>
-              <img src="http://198.54.124.245/wp-content/uploads/2020/02/yHhBfL2msdFWwLpjGSgPJpVmxQN.jpg" alt="">
-              <span class="movie-info">
-                <ion-card-title class="card-title icon-size-12">The Boy (2020)</ion-card-title>
-              </span>
-            </ion-card>   
-          </div>
+          <ion-grid class="grid">
+            <ion-row>
+              <div *ngFor="let key of movieRecomend" style="display: contents;">
+                <ng-container *ngFor="let items of key">
+                  <ion-col size="4" *ngIf="items">
+                    <ng-container *ngIf="items.imdb != item.imdbID">
+                    <ion-card class="card-body-grid radius">
+                      <div class="rating-duration">
+                        <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+                        <span class="rating">{{ items.rating }}</span>
+                        <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+                        <span class="rating">{{ items.runtime }}</span>
+                      </div>
+                      <span class="mv-quality hd">{{ items.quality }} </span>
+                      <img src="{{ items.poster }}" alt="">
+                      <span class="movie-info">
+                        <ion-card-title class="card-title">{{ items.title }} ({{ items.year }})</ion-card-title>
+                      </span>
+                    </ion-card>   
+                  </ng-container>
+                  </ion-col>
+                </ng-container>
+            </div>
+            </ion-row>
+          </ion-grid>      
         </ion-row>
       </div>
     </div>

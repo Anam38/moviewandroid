@@ -8,7 +8,7 @@
   </ion-header>
   <!-- end header -->
   <div>
-    <ion-card class="card-body-grid card-body-grid-img" id="movie-card">
+    <ion-card class="card-body-grid-head card-body-grid-img" id="movie-card">
       <img src="../../assets/img/Sunflowers.jpg" alt="">
       <div class="img-profile">
         <img src="../../assets/img/Sunflowers.jpg" alt="">
@@ -21,9 +21,10 @@
       </div>
     </ion-card>
     <div class='tabs'>
-      <input type='radio' id='about' name='t' checked>
+      <input type='radio' id='about' name='profile' checked>
       <label for='about'>About</label>
-      <div class='content'>About :
+      <div class='content'>
+        <p id="cancel-seach" slot="start" style="color: #ffffff;margin: 5px 4px;">About me:</p>
         <form action="#" style="max-width:500px;margin:auto;padding-top:15px;">
           <div class="input-container">
             <i class="fa fa-user icon"><ion-icon name="person"></ion-icon></i>
@@ -43,10 +44,15 @@
           <button type="submit" class="btn">Update</button>
         </form>
       </div>
-      <input type='radio' id='history' name='t'>
+      <input type='radio' id='history' name='profile' (click)="getHistoryPaying()">
       <label for='history'>History</label>
-      <div class='content'>History Watch
-        <div style="margin: 10px -10px 35px;">
+      <div class='content'>
+        <div style="display: flex;">
+          <p id="cancel-seach" slot="start" style="color: #ffffff;margin: 5px 4px;">History Watching</p>
+          <p *ngIf="HistoryItem" slot="end" style="color: #eb445a;position: absolute;right: 10px;" (click)="DeleteAll('history')">Clear All</p>
+        </div>
+        <div style="margin: -10px -10px 50px;padding: 10px;" id="loading-history">
+          <!-- loader -->
           <ion-row>
             <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
               <div class="animate-large animate-loader"></div>
@@ -55,12 +61,33 @@
               <div class="animate-title animate-loader-small"></div>
             </ion-col>
           </ion-row>
+          <!--end loader -->
         </div>
+          <ion-grid class="grid" *ngIf="HistoryItem; else saleitem">
+            <ion-row>
+              <!-- loop data history -->
+              <ion-col size="4" *ngFor="let item of HistoryItem" (press)="onPress(item.movieId)" (click)="movieDetail([item.title, item.movieId])">
+                <ion-card class="card-body-grid">
+                  <img src="{{ item.poster }}" alt="">
+                  <span class="movie-info">
+                    <ion-card-title class="card-title">{{ item.title }}</ion-card-title>
+                  </span>
+                </ion-card>   
+              </ion-col>
+              <!--end loop data -->
+            </ion-row>
+          </ion-grid>
+          <ng-template #saleitem>
+            <div>
+              <p style="width: 100%;text-align: center;padding: 10px;">History not Found</p>
+            </div>
+          </ng-template> 
       </div>
-      <input type='radio' id='favorite' name='t'>
+      <input type='radio' id='favorite' name='profile'>
       <label for='favorite'>Favorite Movie</label>
-      <div class='content background-second'>Favorite
-        <div style="margin: 10px -10px 35px;">
+      <div class='content background-second'>
+        <p id="cancel-seach" slot="start" style="color: #ffffff;margin: 5px 4px;">Favorite All</p>
+        <div style="margin: -10px -10px 50px;padding: 10px;">
           <ion-row>
             <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
               <div class="animate-large animate-loader"></div>

@@ -1,0 +1,14 @@
+ion-toolbar{
+    --background: #151517;
+}
+ // new
+ .basic-slide {
+    width: 80%;
+    margin-top: -15px;
+  
+    + label {
+      top: -15px;
+      right: 70%;
+      left: 50px;
+    }
+  }

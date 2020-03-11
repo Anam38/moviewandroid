@@ -1,18 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation , ElementRef, NgZone } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { NavController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { NavController, Platform, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { SearchPage } from '../modal/search/search.page';
+import { CategoryPage } from '../modal/category/category.page';
+
+// Declare jquery
+declare var $;
 
 // API Provider
-import { ApiProviderService } from '../api-provider.service';
+import { ApiProviderService } from '../services/api/api-provider.service';
 
 import { environment, API_KEY_TMDB, URL_API_TMDB, URL_IMG_TMDB, URL_API_GDPLA_MOVIE } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['../../assets/scss/main.scss']
+  styleUrls: ['../../assets/scss/main.scss','./home.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class HomePage {
 
@@ -20,50 +25,74 @@ export class HomePage {
   playNow : object;
   soon    : object;
   populer : object;
-  
+
   loaderCount : any[];
 
-  movie_pages : string;
   url_img     : string;
-  
+
+  movie_pages : number;
 
   constructor(
-    public navCtrl: NavController,
-    public http: HttpClient,
+    private zone: NgZone,
     public router: Router,
-    public apiprovider : ApiProviderService 
+    public storage: Storage,
+    public platform: Platform,
+    public navCtrl: NavController,
+    public apiprovider : ApiProviderService,
+    public modalController : ModalController,
     ) {
       this.url_img = URL_IMG_TMDB;
-
+      this.movie_pages = 1;
+      
       this.loaderCount = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-    
+      
       this.movieplayingnow();
       this.soonmovie();
-      
-    }
 
+      var self = this;
+      // jquery srcipt
+      this.zone.run(() => {
+        $(document).on('click','#moviedetail',function(){
+            var movietitle = $(this).attr('dataTitle');
+            var movieID = $(this).attr('dataID');
+            
+            self.movieDetail([movietitle,movieID]);
+
+          })
+        })
+      //end  jquery srcipt
+    }
+    
+    // move to detail movie
     public movieDetail(param) {
       
       var title = param[0];
-      var movieID = param[1];
+      var movieID = param[1];      
       
       for (var _i = 0; _i < param[0].length; _i++) {
         title = title.replace(" ", "-");
       }
       
-      this.apiprovider.param = movieID
+      this.apiprovider.ID = movieID
 
-      this.router.navigate([title]);
+      this.router.navigate(['movie/'+title]);
+    }
+
+  public moviemore(param){
+    this.apiprovider.param = param
+    this.router.navigate(['more/'+param]);
   }
 
-    // doRefresh(event) {
-    //   console.log('Begin async operation');
-    //   setTimeout(() => {
-    //     console.log('Async operation has ended');
-    //     // this.movieplayingnow()
-    //     event.target.complete();
-    //   }, 2000);
-    // }
+  // refresh page
+    doRefresh(event) {
+      console.log('Begin async operation');
+      setTimeout(() => {
+        console.log('Async operation has ended');
+        this.movie_pages = 1;
+        this.movieplayingnow()
+        event.target.complete();
+      }, 2000);
+    }
     
     // data api play now
     movieplayingnow(){
@@ -71,127 +100,105 @@ export class HomePage {
       .subscribe(
         resdata => {
           this.playNow = resdata;
-          this.movie_pages = '1';
           
-          // setTimeout(function(){
-            //     document.getElementById('loader').hidden = true;
-                console.log(resdata)
-            // },1000);
+            setTimeout(function(){
+                document.getElementById('loader').hidden = true;
+            },500);
             
           },err=> {
             console.log('error');
           });
         }
-        
+    
+    // get data api movie soon
     soonmovie() {
           this.apiprovider.moviewApiUrl('soon')
           .subscribe(
             resdata => {
-              this.soon = [1];
+              this.soon = resdata['results'] ;
         },err=> {
           console.log('error');
       });
     }
 
-  //   movienextpage(page){
-
-  //     var html : string;
-
-  //     this.http.get(URL_API_GDPLA_MOVIE+'newest?page='+page)
-  //     .subscribe(
-  //       resdata => {
-
-  //         this.movie_pages = page;
-
-  //         for (const item of resdata) {
-  //               html += '<ion-col size="4">'+
-  //                         '<ion-card style="margin: 0px 0px;height: 167px; ">'+
-  //                           '<div style="position: absolute;left: 0px;padding: 1px;background-color: rgba(39, 59, 89, 0.7);">'+
-  //                             '<ion-icon name="star" color="warning" style="font-size:10px"></ion-icon>'+
-  //                             '<span style="color: white;font-size: 10px;padding-left: 3px;font-weight: bold;">'+ item.rating +'</span>'+
-  //                             '<ion-icon name="time" color="warning" style="padding-left: 5px;font-size:10px"></ion-icon>'+
-  //                             '<span style="color: white;font-size: 10px;padding-left: 3px;font-weight: bold;">'+ item.runtime +'</span>'+
-  //                           '</div>'+
-  //                           '<span style="background: rgba(11, 171, 0, 0.58);color: #fff;font-size: 10px;font-weight: 600;height: auto;line-height: normal;padding: 4px 6px;position:absolute; right: 0px;top: 0px; width: auto;border-bottom-left-radius: 7px;">'+item.quality.split(' ')[0] +'</span>'+
-  //                           '<img src="'+item.poster+'" alt="" style="height:100%;">'+
-  //                           '<span style="background-image: url('+"../../assets/img/background-title.png"+');position: absolute;height: 30%;width: 100%;bottom: 0px;left: 0px;">'+
-  //                             '<ion-card-title style="font-size: 12px;position: absolute;text-align: center !important;bottom: 10px;color: white;width: 100%;">'+ item.title +'(' +item.year +')</ion-card-title>'+
-  //                           '</span>'+
-  //                         '</ion-card>'+
-  //                       '</ion-col>'
-  //           }
-  //           html = html.replace("undefined","");
-            
-  //           document.getElementById('movie-list-content').insertAdjacentHTML('beforeend', html);
-          
-  //       },err=> {
-  //         console.log('error');
-  //     });
-  //   }
-  
-  // // load data after scroll up 
-  // loadData(event,page) {
-
-  //   var page = page+1;
     
-  //   setTimeout(() => {
-  //     console.log('Done');
 
-  //     this.movienextpage(page);
+    // load data after scroll up 
+    loadData(event,page) {
 
-  //     event.target.complete();
+      var page = page+1;
+      
+      if(page >= 3){
+        document.getElementById('loadMovie').hidden = true;
+      }
+      
+      setTimeout(() => {
+        console.log('Done');
 
-  //   }, 1000);
-  // }
+        this.movienextpage(page);
 
-  // dropgenre(){
-  //   let element = <HTMLInputElement> document.getElementById("genre-checkbox");  
-  //   let country = <HTMLInputElement> document.getElementById("country-checkbox");  
-  //   let years = <HTMLInputElement> document.getElementById("years-checkbox");  
-  //   if (element.checked) {
+        event.target.complete();
 
-  //     country.checked = false
-  //     years.checked = false
+      }, 1000);
+    }
 
-  //     document.getElementById('genre-drop').setAttribute("style", "display:block");
-  //     document.getElementById('country-drop').setAttribute("style", "display:none");
-  //     document.getElementById('years-drop').setAttribute("style", "display:none");
-  //   }else{
-  //     document.getElementById('genre-drop').setAttribute("style", "display:none");
-  //   }
-  // }
-  // dropcountry(){
-  //   let element = <HTMLInputElement> document.getElementById("country-checkbox");  
-  //   let genre = <HTMLInputElement> document.getElementById("genre-checkbox");  
-  //   let years = <HTMLInputElement> document.getElementById("years-checkbox");  
+    // get data movie after scroll up
+    movienextpage(page){
 
-  //   if (element.checked) {
+      var html : string;
 
-  //     genre.checked = false
-  //     years.checked = false
+      this.apiprovider.loadmovie(page)
+      .subscribe(
+        resdata => {
+          this.movie_pages = page;
+          
+          let data = resdata
+          
+          for (let item in data) {
+                html += '<ion-col size="4" id="moviedetail" dataTitle="'+data[item].title+'" dataID="'+data[item].imdb+'">'+
+                          '<ion-card class="card-body-grid">'+
+                            '<div class="rating-duration">'+
+                              '<ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>'+
+                              '<span class="rating">'+ data[item].rating +'</span>'+
+                              '<ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>'+
+                              '<span class="rating">'+ data[item].runtime +'</span>'+
+                            '</div>'+
+                            '<span class="mv-quality '+ data[item].quality.split(' ')[0].toLowerCase() +'">'+data[item].quality.split(' ')[0] +'</span>'+
+                            '<img src="'+data[item].poster+'" alt="">'+
+                            '<span class="movie-info">'+
+                              '<ion-card-title class="card-title">'+ data[item].title +'(' +data[item].year +')</ion-card-title>'+
+                            '</span>'+
+                          '</ion-card>'+
+                        '</ion-col>'
 
-  //     document.getElementById('country-drop').setAttribute("style", "display:block");
-  //     document.getElementById('genre-drop').setAttribute("style", "display:none");
-  //     document.getElementById('years-drop').setAttribute("style", "display:none");
-  //   }else{
-  //     document.getElementById('country-drop').setAttribute("style", "display:none");
-  //   }
-  // }
-  // dropyears(){
-  //   let element = <HTMLInputElement> document.getElementById("years-checkbox");  
-  //   let country = <HTMLInputElement> document.getElementById("country-checkbox");  
-  //   let genre = <HTMLInputElement> document.getElementById("genre-checkbox"); 
+            }
+            html = html.replace("undefined","");
+            
+            document.getElementById('movie-list-content').insertAdjacentHTML('beforeend', html);
+          
+        },err=> {
+          console.log('error');
+      });
+    }
 
-  //   if (element.checked) {
+    // open modal searching
+    async SearchModal() {
+      const modal = await this.modalController.create({
+        component: SearchPage
+      });
 
-  //     genre.checked = false
-  //     country.checked = false
+      return await modal.present();
+    }
 
-  //     document.getElementById('years-drop').setAttribute("style", "display:block");
-  //     document.getElementById('genre-drop').setAttribute("style", "display:none");
-  //     document.getElementById('country-drop').setAttribute("style", "display:none");
-  //   }else{
-  //     document.getElementById('years-drop').setAttribute("style", "display:none");
-  //   }
-  // }
+    // open modal searching category
+    async CategoryModal(category) {
+      const modal = await this.modalController.create({
+        component: CategoryPage,
+        componentProps: {
+          'category': category
+        }
+      });
+
+      return await modal.present();
+    }
 }
