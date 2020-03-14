@@ -15,7 +15,7 @@
     top: 170px;
     height: 75px;
     width: 100%;
-    margin: 0px 36%;
+    text-align: center;
 }
 .img-profile img{
     width: 100px;
@@ -26,17 +26,18 @@
 $size: 88px;
 .btn-change{
     position: relative;
-    height: 35px;
-    width: 88px;
+    // height: 35px;
+    width: 90px;
     background-color: #edecee;
-    bottom: 40px;
-    left: 6px;
+    bottom: 45px;
+    // left: 6px;
     border-bottom-left-radius: $size * 2;
     border-bottom-right-radius: $size * 2;
     opacity: 0.7;
     text-align: center;
     padding: 6px;
     font-size: 20px;
+    margin: auto;
 }
 .tabs {
     // box-shadow: 0px 2px 15px 2px;

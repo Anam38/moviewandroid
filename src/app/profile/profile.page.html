@@ -11,9 +11,9 @@
     <ion-card class="card-body-grid-head card-body-grid-img" id="movie-card">
       <img src="../../assets/img/Sunflowers.jpg" alt="">
       <div class="img-profile">
-        <img src="../../assets/img/Sunflowers.jpg" alt="">
-        <div class="btn-change">
-          <ion-icon name="share-outline" class="color-second"></ion-icon>
+        <img id="img-profile" src="{{ (ProfileImg) ? ProfileImg  : '../../assets/img/Sunflowers.jpg' }}" alt="" (click)="changePhoto()">
+        <div class="btn-change" (click)="changePhoto()">
+          <ion-icon name="share-outline" class="color-second" (click)="changePhoto()"></ion-icon>
         </div>
       </div>
       <div class="movie-info">

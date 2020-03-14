@@ -114,34 +114,34 @@ export class MoviewdetailPage implements OnInit {
     
     var movieId = movieId.substring(1, movieId.length-1);
 
-    this.apiprovider.moviewDetail(movieId)
-      .subscribe(
-        resdata => {
-          this.movieDetail = [resdata];
-          this.moviefavorite = resdata;
-          this.moviewPlayUrl = resdata['player_url'];
-          this.favoriteId = resdata['imdbID']
+    // this.apiprovider.moviewDetail(movieId)
+    //   .subscribe(
+    //     resdata => {
+    //       this.movieDetail = [resdata];
+    //       this.moviefavorite = resdata;
+    //       this.moviewPlayUrl = resdata['player_url'];
+    //       this.favoriteId = resdata['imdbID']
 
-          this.checkFavorite(resdata['imdbID']);
-          this.Recomendation(resdata['Actors']);
-          // console.log(resdata);
+    //       this.checkFavorite(resdata['imdbID']);
+    //       this.Recomendation(resdata['Actors']);
+    //       // console.log(resdata);
           
-        },err=> {
-          console.log('error',err);
-        });
-
-    // let nativeCall = this.nativeHttp.get(URL_API_GDPLA_MOVIE+'imdb/'+movieId, {}, {
-    //   'Content-Type' : 'application/json'
-    // });
-    // from(nativeCall).subscribe(
-    //   resdata => {
-    //     this.moviefavorite = resdata;
-    //     this.movieDetail = [JSON.parse(resdata.data)];
-    //     this.moviewPlayUrl = JSON.parse(resdata.data).player_url        
-    //     this.favoriteId = JSON.parse(resdata.data).imdbID        
     //     },err=> {
-    //       console.error(err);
-    //   });
+    //       console.log('error',err);
+    //     });
+
+    let nativeCall = this.nativeHttp.get(URL_API_GDPLA_MOVIE+'imdb/'+movieId, {}, {
+      'Content-Type' : 'application/json'
+    });
+    from(nativeCall).subscribe(
+      resdata => {
+        this.moviefavorite = resdata;
+        this.movieDetail = [JSON.parse(resdata.data)];
+        this.moviewPlayUrl = JSON.parse(resdata.data).player_url        
+        this.favoriteId = JSON.parse(resdata.data).imdbID        
+        },err=> {
+          console.error(err);
+      });
   }
 
   // set url to iframe
