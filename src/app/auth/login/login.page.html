@@ -1,0 +1,22 @@
+<ion-content class="bg-dark">
+  <div class="content wrapper">
+    <h1>Login</h1>
+    <form class="form" method="post" action="yourpage.html">
+      <input type="email" class="email" placeholder="Email" #email required>
+      <input type="password" class="password" placeholder="password" #password required>
+      <input type="submit" class="submit" value="Login" (click)="LoginUser(email, password)">
+      <p class="or">Or</p>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <input type="submit" class="google" value="Google">
+          </ion-col>
+          <ion-col size="6">
+            <input type="submit" class="facebook" value="Facebook">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <p>Doesn't have account  <a href="register">Register</a></p>
+    </form>
+  </div>
+</ion-content>

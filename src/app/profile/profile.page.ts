@@ -5,6 +5,7 @@ import { ApiProviderService } from '../services/api/api-provider.service';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { AuthProviderService } from '../services/auth/auth-provider.service'
 
 
 // Declare jquery
@@ -18,7 +19,9 @@ declare var $;
 export class ProfilePage {
 
   HistoryItem :  HistoryItem[] = [];
+  
   ProfileImg : string;
+  UserAuth : string;
 
   constructor(
     public File: File,
@@ -28,8 +31,10 @@ export class ProfilePage {
     public storageService : StorageService,
     public toastController: ToastController,
     public alertController: AlertController,
+    public authService: AuthProviderService,
     public actionSheetController: ActionSheetController
   ) {
+    this.userdata();
   }
   
   // move to detail movie
@@ -157,19 +162,23 @@ export class ProfilePage {
           let path = imageData.substring(0, imageData.lastIndexOf('/') + 1);
           this.File.readAsDataURL(path, filename).then(data => {
 
-              this.ProfileImg = data;
-          });
+              var dataImg = data;
 
-    }, (err) => {
+              this.ProfileImg = dataImg;
+
+              this.ImageUpload(dataImg);
+          });
+     }, (err) => {
       // Handle error
       this.presentToast(err.message);
     });
+    
     
   }
   // take from galery
   takeFromGalery(){
     const options: CameraOptions = {
-      quality: 100,
+      quality: 70,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       saveToPhotoAlbum : false,
@@ -181,12 +190,68 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
      // If it's base64 (DATA_URL):
-     this.ProfileImg = 'data:image/jpeg;base64,' + imageData;
-
+     var dataImg = 'data:image/jpeg;base64,' + imageData;
+     
+     this.ProfileImg = dataImg;
+     
+     this.ImageUpload(dataImg);
+    
     }, (err) => {
      // Handle error
      this.presentToast(err.message);
     });
+  }
+  
+  // upload img 
+  ImageUpload(DataImg){
+    this.authService.ImgUpload(DataImg).then(resdata => {
+
+      if(resdata.state == 'success'){
+        // update img url user
+        this.PathImg(resdata.metadata.fullPath);
+
+      }else{
+        this.presentToast('Failed..!');
+      }
+      
+    }).catch((err) => {
+      this.presentToast(err.message);
+      console.log(err.message);
+      
+    })
+  }
+
+  // get url img 
+  PathImg(imgUrl){
+    this.authService.PathImg(imgUrl).then(url => {
+      this.ImgUpdate(url);
+    }).catch(err => {
+      console.log(err.message);
+    })
+  }
+
+  // update img profile
+  ImgUpdate(dataImg){
+    this.authService.UserProfileImg(dataImg).then(resdata => {
+      
+      // update session user
+      this.authService.UserUpdateSession();
+      
+      this.presentToast('Change succesfully');
+
+      
+    }).catch(err => {
+      console.log(err.message);
+      this.presentToast(err.message);
+    })
+  }
+
+  // get data user form localStorage
+  userdata(){
+    // get data user form localStorage
+    this.UserAuth = JSON.parse(localStorage.getItem('user'));
+    console.log(this.UserAuth);
+    
   }
 
   // call Toast funtion

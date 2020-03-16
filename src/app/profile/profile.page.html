@@ -11,13 +11,13 @@
     <ion-card class="card-body-grid-head card-body-grid-img" id="movie-card">
       <img src="../../assets/img/Sunflowers.jpg" alt="">
       <div class="img-profile">
-        <img id="img-profile" src="{{ (ProfileImg) ? ProfileImg  : '../../assets/img/Sunflowers.jpg' }}" alt="" (click)="changePhoto()">
+        <img id="img-profile" src="{{ (ProfileImg) ? ProfileImg  : UserAuth.photoURL }}" alt="" (click)="changePhoto()">
         <div class="btn-change" (click)="changePhoto()">
           <ion-icon name="share-outline" class="color-second" (click)="changePhoto()"></ion-icon>
         </div>
       </div>
       <div class="movie-info">
-        <ion-card-title class="card-title card-title-d">Sun Flowers</ion-card-title>
+        <ion-card-title class="card-title card-title-d">{{ UserAuth.displayName }}</ion-card-title>
       </div>
     </ion-card>
     <div class='tabs'>
@@ -25,23 +25,24 @@
       <label for='about'>About</label>
       <div class='content'>
         <p id="cancel-seach" slot="start" style="color: #ffffff;margin: 5px 4px;">About me:</p>
-        <form action="#" style="max-width:500px;margin:auto;padding-top:15px;">
+        <form action="#" style="max-width:500px;margin: 0px 0px 50px;padding-top:15px;">
           <div class="input-container">
             <i class="fa fa-user icon"><ion-icon name="person"></ion-icon></i>
-            <input class="input-field" type="text" placeholder="Username" name="usrnm">
+            <input class="input-field" type="text" placeholder="Username" name="usrnm" value="{{ UserAuth.displayName }}">
           </div>
         
           <div class="input-container">
             <i class="fa fa-envelope icon"><ion-icon name="mail-unread"></ion-icon></i>
-            <input class="input-field" type="text" placeholder="Email" name="email">
+            <input class="input-field" type="text" placeholder="Email" name="email" value="{{ UserAuth.email }}">
           </div>
           
           <div class="input-container">
             <i class="fa fa-key icon"><ion-icon name="lock-open"></ion-icon></i>
-            <input class="input-field" type="password" placeholder="Password" name="psw">
+            <input class="input-field" type="password" placeholder="Password" name="password" >
           </div>
         
           <button type="submit" class="btn">Update</button>
+          <button type="submit" class="btn btn-logout" (click)="authService.SignOut()">Logout</button>
         </form>
       </div>
       <input type='radio' id='history' name='profile' (click)="getHistoryPaying()">

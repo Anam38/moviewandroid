@@ -41,6 +41,11 @@ export class HomePage {
     public apiprovider : ApiProviderService,
     public modalController : ModalController,
     ) {
+      var user = JSON.parse(localStorage.getItem('user'));
+      if(!user){
+        this.router.navigate(['login']);
+      }
+
       this.url_img = URL_IMG_TMDB;
       this.movie_pages = 1;
       

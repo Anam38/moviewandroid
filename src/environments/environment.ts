@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig : {
+    apiKey: "AIzaSyChy05XhhuATuCjL2FckurA4Bh_FNimWc4",
+    authDomain: "movieapk-5ee30.firebaseapp.com",
+    databaseURL: "https://movieapk-5ee30.firebaseio.com",
+    projectId: "movieapk-5ee30",
+    storageBucket: "movieapk-5ee30.appspot.com",
+    messagingSenderId: "108979669141",
+    appId: "1:108979669141:web:54c41fbdb8c3d39348b39c",
+    measurementId: "G-24LV2Z53Y7"
+  }
 };
 
 // config for the movie data base

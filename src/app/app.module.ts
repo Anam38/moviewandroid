@@ -14,6 +14,12 @@ import { File } from '@ionic-native/file/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 
+// firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 //provider
 import { StorageService } from './services/storage/storage.service';
@@ -47,6 +53,10 @@ import { ResultPage } from './modal/result/result.page';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
   ],
   providers: [
     StatusBar,

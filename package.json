@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "~8.2.14",
     "@angular/core": "~8.2.14",
+    "@angular/fire": "^5.4.2",
     "@angular/forms": "~8.2.14",
     "@angular/http": "^7.2.16",
     "@angular/platform-browser": "~8.2.14",
@@ -44,6 +45,7 @@
     "cordova-plugin-video-player": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
+    "firebase": "^7.11.0",
     "hammerjs": "^2.0.8",
     "ionic-long-press": "^2.0.3",
     "rxjs": "^6.5.4",
