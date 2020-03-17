@@ -25,6 +25,7 @@ import { environment } from '../environments/environment';
 import { StorageService } from './services/storage/storage.service';
 import { IonicGestureConfig } from './services/utils/IonicGestureConfig';
 import { ApiProviderService } from './services/api/api-provider.service';
+import { StatusbarService } from './services/statusbar/statusbar.service';
 
 // page
 import { AppComponent } from './app.component';
@@ -64,6 +65,7 @@ import { ResultPage } from './modal/result/result.page';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {provide: HAMMER_GESTURE_CONFIG, useClass: IonicGestureConfig},
     ApiProviderService,
+    StatusbarService,
     StorageService,
     Camera,
     HTTP,

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-
-// provider
-import { AuthProviderService, User } from '../../services/auth/auth-provider.service'
+import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+
+// provider
+import { AuthProviderService, User } from '../../services/auth/auth-provider.service';
+import { StatusbarService } from '../../services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-register',
@@ -17,9 +18,13 @@ export class RegisterPage implements OnInit {
 
   constructor(
     public router : Router,
+    public statusbar : StatusbarService,
     public UserAuth: AuthProviderService,
     public toastController: ToastController,
-  ) { }
+  ) { 
+    // set status bar 
+    this.statusbar.StatusbarTrans();
+  }
 
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem('user'));

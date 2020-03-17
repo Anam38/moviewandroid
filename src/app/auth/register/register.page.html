@@ -1,4 +1,4 @@
-<ion-content class="bg-dark">
+<ion-content class="bg-img">
   <div class="content wrapper">
     <h1>Register For An Account</h1>
     <p>To sign-up for a free basic account please provide us with some basic information using
@@ -8,7 +8,7 @@
       <input type="email" class="email" placeholder="Email" name="email" [(ngModel)]="newUserItem.email" #email required>
       <input type="password" class="password" placeholder="password" name="password" #password required>
       <input type="submit" class="submit" value="Register" (click)="register(email,password)" >
-      <p>Or you already have Account <a href="login">Login</a></p>
+      <p>Already have an Account  <a href="login">Login</a></p>
     </form>
   </div>
 </ion-content>

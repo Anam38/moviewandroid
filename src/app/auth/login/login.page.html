@@ -1,22 +1,23 @@
-<ion-content class="bg-dark">
+<ion-content padding class="bg-img">
   <div class="content wrapper">
     <h1>Login</h1>
     <form class="form" method="post" action="yourpage.html">
       <input type="email" class="email" placeholder="Email" #email required>
       <input type="password" class="password" placeholder="password" #password required>
       <input type="submit" class="submit" value="Login" (click)="LoginUser(email, password)">
-      <p class="or">Or</p>
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6">
-            <input type="submit" class="google" value="Google">
-          </ion-col>
-          <ion-col size="6">
-            <input type="submit" class="facebook" value="Facebook">
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <p>Doesn't have account  <a href="register">Register</a></p>
+      <div class="center">
+        <p class="social-media-text">Login With Social network</p>
+        <button class="btn-social facebook">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </button>
+        <button class="btn-social google">
+          <ion-icon name="logo-google"></ion-icon>
+        </button>
+        <button class="btn-social twitter">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </button>
+        <p class="to-register">Doesn't have account  <a href="register">Register</a></p>
+      </div>
     </form>
   </div>
 </ion-content>

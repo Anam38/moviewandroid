@@ -5,6 +5,7 @@ import { AuthProviderService, User } from '../../services/auth/auth-provider.ser
 import { from } from 'rxjs';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { StatusbarService } from '../../services/statusbar/statusbar.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,13 @@ export class LoginPage implements OnInit {
 
   constructor(
     public router: Router,
+    public statusbar : StatusbarService,
     public UserAuth: AuthProviderService,
     public toastController: ToastController,
-  ) { }
+  ) { 
+    // set status bar 
+    this.statusbar.StatusbarTrans();
+  }
 
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem('user'));
