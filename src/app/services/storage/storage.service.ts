@@ -31,12 +31,15 @@ export interface FavoriteItem {
 const SEARCH_KEY = "search";
 const HISTORY_KEY = "history";
 const FAVORITE_KEY = "favorite";
+const USER_SESSION = "user";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class StorageService {
+  
+  userData : any;
 
   constructor(
     private storage : Storage,
@@ -169,5 +172,18 @@ export class StorageService {
   // remove storage where key
   public removeStore(key){
     return this.storage.remove(key);
+  }
+
+  // store user profile
+  public UserSession(DataSession){
+
+    this.userData = DataSession;
+    localStorage.setItem(USER_SESSION, JSON.stringify(this.userData));
+    JSON.parse(localStorage.getItem(USER_SESSION));
+    
+  }
+  //get session user
+  public GetUserSession(){
+    return JSON.parse(localStorage.getItem(USER_SESSION));
   }
 }

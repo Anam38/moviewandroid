@@ -34,7 +34,7 @@ export class ProfilePage {
     public authService: AuthProviderService,
     public actionSheetController: ActionSheetController
   ) {
-    this.userdata();
+    this.UserAuth = this.storageService.GetUserSession();
   }
   
   // move to detail movie
@@ -235,7 +235,7 @@ export class ProfilePage {
     this.authService.UserProfileImg(dataImg).then(resdata => {
       
       // update session user
-      this.authService.UserUpdateSession();
+      this.sessionUpadate()
       
       this.presentToast('Change succesfully');
 
@@ -246,12 +246,61 @@ export class ProfilePage {
     })
   }
 
-  // get data user form localStorage
-  userdata(){
-    // get data user form localStorage
-    this.UserAuth = JSON.parse(localStorage.getItem('user'));
-    console.log(this.UserAuth);
+  //update profile user
+  updateProfile(username, email, newPassword){
     
+    var noticeName = null; 
+    var noticeEmail = null; 
+    var noticePass = null; 
+    var username = username.value;
+    var email = email.value;
+    var newPassword = newPassword.value;
+
+    if(username && username != this.UserAuth['displayName']){
+      this.authService.UserProfileName(username).then(resdata => {
+        console.log('name success update');
+      }).catch(err => {
+        this.presentToast(err.message);
+      })
+    }else{
+      noticeName = 1;
+    }
+    
+    if(email && email != this.UserAuth['email']){
+      this.authService.UserProfileEmail(email).then(resdata => {
+        console.log('email success update');
+      }).catch(err => {
+        this.presentToast(err.message);
+      })
+    }else{
+      noticeEmail = 2;
+    }
+    
+    if(newPassword){
+      this.authService.UserProfilePassword(newPassword).then(resdata => {
+        console.log('Password success update');
+      }).catch(err => {
+        this.presentToast(err.message);
+      })
+    }else{
+      noticePass = 3;
+    }
+    
+    if(!noticePass || !noticeEmail || !noticeName){
+      // update session user
+      this.sessionUpadate()
+
+    }else{
+      this.presentToast("Doesn't Changes");
+    }
+  }
+
+  //get and update session user
+  sessionUpadate(){
+     // get profile user
+     this.UserAuth = this.authService.UserProfile();
+     // update session user
+     this.authService.UserUpdateSession();
   }
 
   // call Toast funtion

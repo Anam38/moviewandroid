@@ -28,20 +28,20 @@
         <form action="#" style="max-width:500px;margin: 0px 0px 50px;padding-top:15px;">
           <div class="input-container">
             <i class="fa fa-user icon"><ion-icon name="person"></ion-icon></i>
-            <input class="input-field" type="text" placeholder="Username" name="usrnm" value="{{ UserAuth.displayName }}">
+            <input class="input-field" type="text" placeholder="Username" name="username" value="{{ UserAuth.displayName }}" #username required>
           </div>
         
           <div class="input-container">
             <i class="fa fa-envelope icon"><ion-icon name="mail-unread"></ion-icon></i>
-            <input class="input-field" type="text" placeholder="Email" name="email" value="{{ UserAuth.email }}">
+            <input class="input-field" type="email" placeholder="Email" name="email" value="{{ UserAuth.email }}" #email required>
           </div>
           
           <div class="input-container">
             <i class="fa fa-key icon"><ion-icon name="lock-open"></ion-icon></i>
-            <input class="input-field" type="password" placeholder="Password" name="password" >
+            <input class="input-field" type="password" placeholder="Password" name="password" #password minlength="6">
           </div>
         
-          <button type="submit" class="btn">Update</button>
+          <button type="submit" class="btn" (click)="updateProfile(username,email,password)">Update</button>
           <button type="submit" class="btn btn-logout" (click)="authService.SignOut()">Logout</button>
         </form>
       </div>

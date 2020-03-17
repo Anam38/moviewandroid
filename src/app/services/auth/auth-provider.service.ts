@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { StorageService } from '../../services/storage/storage.service';
 import * as firebase from 'Firebase';
 
 export interface User {
@@ -24,9 +25,10 @@ export class AuthProviderService {
   constructor(
     public router: Router,  
     public FireAuth : AngularFireAuth,
-    public FireStore : AngularFirestore
+    public FireStore : AngularFirestore,
+    public UserSession : StorageService
   ) {
-    this.UserUpdateSession();
+    this.UserLoginCheck();
    }
 
   // login User firebase
@@ -59,6 +61,23 @@ export class AuthProviderService {
     });
   }
 
+  // update user profile password
+  UserProfileName(DataName){
+    return firebase.auth().currentUser.updateProfile({
+     'displayName' : DataName
+    });
+  } 
+
+  // update user profile password
+  UserProfileEmail(DataEmail){
+    return firebase.auth().currentUser.updateEmail(DataEmail);
+  } 
+
+  // update user profile password
+  UserProfilePassword(DataPassword){
+    return firebase.auth().currentUser.updatePassword(DataPassword);
+  } 
+
   // Store user in localStorage
   SetUserData(user) {
     const userRef : AngularFirestoreDocument<any> = this.FireStore.doc(`users/${user.uid}`);
@@ -75,20 +94,30 @@ export class AuthProviderService {
   }
 
   //get data user
-  GetUserData(){
-    
+  UserProfile(){
+    this.userData = firebase.auth().currentUser;
+    return this.userData;
+  }
+  
+  // update sesison user
+  UserUpdateSession(){
+    var user = firebase.auth().currentUser;
+    if(user){
+
+      this.userData = user;
+      this.UserSession.UserSession(this.userData);
+
+    }
   }
 
   // check sesision user
-  UserUpdateSession(){
-    this.FireAuth.authState.subscribe(user => {
+  UserLoginCheck(){
+    this.FireAuth.authState.subscribe(user => {      
       if (user) {        
+
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-      } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        this.UserSession.UserSession(this.userData);
+      
       }
     })
   }
