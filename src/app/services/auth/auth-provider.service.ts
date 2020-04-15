@@ -4,6 +4,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { StorageService } from '../../services/storage/storage.service';
 import * as firebase from 'Firebase';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 export interface User {
   uid: string;
@@ -24,12 +25,39 @@ export class AuthProviderService {
 
   constructor(
     public router: Router,  
+    public googlePlus: GooglePlus,  
     public FireAuth : AngularFireAuth,
     public FireStore : AngularFirestore,
     public UserSession : StorageService
   ) {
     this.UserLoginCheck();
    }
+
+  //  login with google
+   googleLogin(): Promise<any> {
+    return this.googlePlus.login({
+    }).then( res => {
+          // login with Credential
+          // const user = firebase.auth.GoogleAuthProvider.credential(res.accessToken)
+          console.log(res);
+          
+          // this.UserLoginCredential(res.accessToken);
+
+    }).catch(err => {
+      this.onError('googleLogin',err);
+    })
+  }
+
+  // login with credential
+  UserLoginCredential(idToken){
+    return firebase.auth().signInWithCredential(
+      firebase.auth.GoogleAuthProvider.credential(null , idToken)
+    ).then(res =>{
+      console.log(res);
+    }).catch(err => {
+      this.onError('UserLoginCredential', err);
+    });
+  }   
 
   // login User firebase
   UserLogin(email, password){
@@ -47,7 +75,7 @@ export class AuthProviderService {
       'displayName' : user.displayName,
       'photoURL'  : '../../../assets/img/user.png'
     }).catch((error) => {
-      console.log(error.message)
+      this.onError('UserUpdate',error);
     })
   }
 
@@ -124,6 +152,9 @@ export class AuthProviderService {
 
   // Sign-out 
   SignOut() {
+    // return this.googlePlus.logout().then(()=> {
+    //   console.log('logout');
+    // })
     return this.FireAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['login']);
@@ -149,6 +180,11 @@ export class AuthProviderService {
 
     return pathImg.getDownloadURL();
 
+  }
+
+  // on response error
+  onError(funtion, err){
+    console.log('Error in '+funtion+': ' ,err.message);
   }
 }
 

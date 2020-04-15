@@ -20,6 +20,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 //provider
 import { StorageService } from './services/storage/storage.service';
@@ -60,6 +61,7 @@ import { ResultPage } from './modal/result/result.page';
     AngularFirestoreModule
   ],
   providers: [
+    GooglePlus,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

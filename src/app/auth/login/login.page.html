@@ -4,16 +4,16 @@
     <form class="form" method="post" action="yourpage.html">
       <input type="email" class="email" placeholder="Email" #email required>
       <input type="password" class="password" placeholder="password" #password required>
-      <input type="submit" class="submit" value="Login" (click)="LoginUser(email, password)">
+      <input type="submit" class="submit" value="Login" (click)="LoginUser(email, password)"> 
       <div class="center">
         <p class="social-media-text">Login With Social network</p>
         <button class="btn-social facebook">
           <ion-icon name="logo-facebook"></ion-icon>
         </button>
-        <button class="btn-social google">
+        <button class="btn-social google" (click)="UserAuth.googleLogin()">
           <ion-icon name="logo-google"></ion-icon>
         </button>
-        <button class="btn-social twitter">
+        <button class="btn-social twitter" (click)="UserAuth.SignOut()">
           <ion-icon name="logo-twitter"></ion-icon>
         </button>
         <p class="to-register">Doesn't have account  <a href="register">Register</a></p>
@@ -21,3 +21,4 @@
     </form>
   </div>
 </ion-content>
+

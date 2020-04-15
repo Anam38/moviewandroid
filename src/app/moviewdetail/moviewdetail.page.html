@@ -13,7 +13,7 @@
         <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
       </div>
     </div>
-    <ion-card class="card-body-grids card-body-grid-img" id="movie-card">
+    <ion-card class="card-body-grids" id="movie-card">
       <img src="{{ item.Poster }}" alt="">
       <div class="btn-play" (click)="playvideo(item.imdbID)">
         <div class="play-movie">
@@ -60,23 +60,23 @@
           <tbody>
             <tr>
               <td>Director</td>
-              <td>{{ (item.Director) ? item.Director : '-' }}</td>
+              <td>: {{ (item.Director) ? item.Director : '-' }}</td>
             </tr>
             <tr>
               <td>Writer</td>
-              <td>{{ (item.Writer) ? item.Writer : '-' }}</td>
+              <td>: {{ (item.Writer) ? item.Writer : '-' }}</td>
             </tr>
             <tr>
               <td>Language</td>
-              <td>{{ (item.Language) ? item.Language : '-' }}</td>
+              <td>: {{ (item.Language) ? item.Language : '-' }}</td>
             </tr>
             <tr>
               <td>Country</td>
-              <td>{{ (item.Country) ? item.Country : '-' }}</td>
+              <td>: {{ (item.Country) ? item.Country : '-' }}</td>
             </tr>
             <tr>
               <td>Type</td>
-              <td>{{ (item.Type) ? item.Type : '-' }}</td>
+              <td>: {{ (item.Type) ? item.Type : '-' }}</td>
             </tr>
           </tbody>
         </table>

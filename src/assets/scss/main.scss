@@ -35,6 +35,10 @@ ion-content {
     --background: transparent !important;
     z-index: 0;
 }
+
+.ui-body-c, .ui-overlay-c {
+  text-shadow: none !important;
+}
   p{
       margin: 5px 0px;
       color: white ;
@@ -109,7 +113,7 @@ ion-content {
    .category-name{
     font-weight: bold;
     margin: 10px;
-    color: #fdfdfd;
+    // color: #fdfdfd;
     font-size: 12px;
     // position: relative;
    }
@@ -123,7 +127,7 @@ ion-content {
     height: 35px;
     margin: 0px 2.5px;
     border-radius: 5px;
-    padding: 8px 10px;
+    padding: 8px 9px;
     width: 24%;
     }
     .category-btn:first-child{
@@ -290,7 +294,7 @@ ion-content {
     &:hover,
     &:focus {
       animation-name: push;
-      animation-duration: 0.5s;
+      animation-duration: 0.3s;
       animation-timing-function: linear;
       animation-iteration-count: 1;
       &::after {
@@ -305,7 +309,7 @@ ion-content {
     &:hover,
     &:focus {
       animation-name: push;
-      animation-duration: 0.5s;
+      animation-duration: 0.3s;
       animation-timing-function: linear;
       animation-iteration-count: 1;
       &::after {
@@ -345,7 +349,7 @@ ion-content {
   .movie-info {
       background-image: url('../../assets/img/background-title.png');
       position: absolute;
-      height: 30%;
+      height: 23%;
       width: 100%;
       bottom: 0px;
       left: 0px;

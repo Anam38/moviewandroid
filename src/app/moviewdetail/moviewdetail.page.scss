@@ -33,6 +33,7 @@ iframe{
     height: 167px;
 }
 .card-body-grid-img, img{
+    width: 100%;
     height: 100%;
     background: #39393f;
     display: block;
@@ -52,7 +53,7 @@ iframe{
     padding: 10px;
 }
 .card-title-d{
-    top: 65px;
+    top: 35px;
     font-size: 20px;
     left: 15px;
     text-align: left !important;
@@ -69,7 +70,7 @@ iframe{
 .movie-duration-genre{
     display: inline-flex;
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 15px;
 }
 .icon-size-15 {
@@ -95,7 +96,7 @@ iframe{
 .like{
     position: absolute;
     right: 10px;
-    bottom: 20px;
+    bottom: 10px;
 }
 .movie-desc{
     height: 20px;
@@ -175,13 +176,15 @@ iframe{
     margin: -5px 2px;
     border-radius: 5px;
     padding: 3px 0px;
-  }
-  .genre-btn-actor{
+    color: white;
+}
+.genre-btn-actor{
     background: linear-gradient(to right, #333338 0%, #4a4a52 48%, #595961 100%);
     height: 30px;
     margin: 0px 3px;
     border-radius: 5px;
     padding: 5px 5px;
+    color: white;
   }
   .frame-title{
     margin: 0px 0px 0px;
@@ -191,4 +194,7 @@ iframe{
   }
   .radius{
       border-radius: 5px!important;
+  }
+  table tbody tr:hover{
+      background-color: #222225;
   }
