@@ -13,6 +13,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -58,6 +59,7 @@ import { ResultPage } from './modal/result/result.page';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    SuperTabsModule.forRoot(),
     AngularFirestoreModule
   ],
   providers: [

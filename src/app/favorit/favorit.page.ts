@@ -48,6 +48,8 @@ export class FavoritPage {
   // load data history searching
   loadSearch(){
     this.storageService.GetFavorite().then(items =>{
+      console.log(items);
+      
       this.favoriteItem = items;              
     })
   }

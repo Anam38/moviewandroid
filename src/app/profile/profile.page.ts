@@ -35,6 +35,7 @@ export class ProfilePage {
     public actionSheetController: ActionSheetController
   ) {
     this.UserAuth = this.storageService.GetUserSession();
+    this.getHistoryPaying();
   }
   
   // move to detail movie

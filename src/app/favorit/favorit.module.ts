@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { SuperTabsModule } from '@ionic-super-tabs/angular';
 import { FavoritPageRoutingModule } from './favorit-routing.module';
 
 import { FavoritPage } from './favorit.page';
@@ -13,6 +14,7 @@ import { FavoritPage } from './favorit.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SuperTabsModule,
     FavoritPageRoutingModule
   ],
   declarations: [FavoritPage]
