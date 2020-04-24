@@ -26,7 +26,7 @@ import { GooglePlus } from '@ionic-native/google-plus/ngx';
 //provider
 import { StorageService } from './services/storage/storage.service';
 import { IonicGestureConfig } from './services/utils/IonicGestureConfig';
-import { ApiProviderService } from './services/api/api-provider.service';
+import { ApiProviderService } from './services/api/movie/api-provider.service';
 import { StatusbarService } from './services/statusbar/statusbar.service';
 
 // page
@@ -34,6 +34,7 @@ import { AppComponent } from './app.component';
 import { SearchPage } from './modal/search/search.page';
 import { CategoryPage } from './modal/category/category.page';
 import { ResultPage } from './modal/result/result.page';
+import { PlayPage } from './modal/play/play.page';
 
 
 @NgModule({
@@ -41,13 +42,15 @@ import { ResultPage } from './modal/result/result.page';
     AppComponent,
     SearchPage,
     CategoryPage,
-    ResultPage
+    ResultPage,
+    PlayPage
   ],
   entryComponents: [
     AppComponent,
     SearchPage,
     CategoryPage,
-    ResultPage
+    ResultPage,
+    PlayPage
   ],
   imports: [
     BrowserModule, 

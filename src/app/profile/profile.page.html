@@ -1,14 +1,15 @@
 
-<ion-content [fullscreen]="true">
   <!-- header -->
-  <ion-header [translucent]="true" class="header bg-dark">
-    <ion-toolbar>
+  <ion-header >
+    <ion-toolbar id="headers" class="header-trans without-statusbar">
       <ion-title>Profile</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-content (ionScroll)="onScroll($event)" [scrollEvents]="true">
   <!-- end header -->
     <ion-card class="card-body-grid-head card-body-grid-img" id="movie-card">
-      <img src="../../assets/img/Sunflowers.jpg" alt="">
+      <img src="../../assets/img/bg-new.jpg" alt="">
       <div class="img-profile">
         <img id="img-profile" src="{{ (ProfileImg) ? ProfileImg  : UserAuth.photoURL }}" alt="" (click)="changePhoto()">
         <div class="btn-change" (click)="changePhoto()">
@@ -103,7 +104,7 @@
           <ion-content>
             <div class='content background-second'>
               <p id="cancel-seach" slot="start" style="color: #ffffff;margin: 5px 4px;">Favorite All</p>
-              <div style="margin: -10px -10px 0px;padding: 10px;">
+              <div style="margin: -10px -10px 0px;padding: 10px;" id="loading-favorite">
                 <ion-row>
                   <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
                     <div class="animate-large animate-loader"></div>
@@ -113,6 +114,25 @@
                   </ion-col>
                 </ion-row>
               </div>
+              <ion-grid class="grid" *ngIf="favoriteItem; else saleitem">
+                <ion-row>
+                  <!-- loop data history -->
+                  <ion-col size="4" *ngFor="let item of favoriteItem" (press)="onPress(item.movieId)" (click)="movieDetail([item.title, item.movieId])">
+                    <ion-card class="card-body-grid">
+                      <img src="{{ item.poster }}" alt="">
+                      <span class="movie-info">
+                        <ion-card-title class="card-title">{{ item.title }}</ion-card-title>
+                      </span>
+                    </ion-card>   
+                  </ion-col>
+                  <!--end loop data -->
+                </ion-row>
+              </ion-grid>
+              <ng-template #saleitem>
+                <div>
+                  <p style="width: 100%;text-align: center;padding: 10px;">History not Found</p>
+                </div>
+              </ng-template> 
             </div>
           </ion-content>
         </super-tab>

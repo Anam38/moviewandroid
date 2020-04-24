@@ -1,0 +1,130 @@
+<!-- header -->
+<ion-header id="header-detail" class="without-statusbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+    </ion-buttons>
+</ion-header>
+
+<ion-content id="ion-content" (ionScroll)="onScroll($event)" [scrollEvents]="true">
+  <div id="body" *ngFor="let item of movieDetail">
+    <div id="video-play">
+      <iframe sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" id="frame-video" style="width: 100%; display: block;border: 0px;margin: 30px 0px;" allowfullscreen></iframe>
+      <div class="footer-video">
+        <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
+      </div>
+    </div>
+    <ion-card class="card-body-grids" id="movie-cards">
+      <img src="{{ item.Poster }}" alt="">
+      <div class="btn-play" (click)="playvideo(item.player_url)">
+        <div class="play-movie">
+          <ion-icon name="caret-forward-circle-outline" class="icon-size-100"></ion-icon>
+        </div>
+        <div class="btn-trailer">
+          <ion-icon name="film-outline"></ion-icon>
+          <p>Trailer</p>
+        </div>
+      </div>
+      <div class="movie-info">
+        <div class="movie-rating">
+          <div>
+            <ion-icon name="star" color="warning" class="icon-size-15" *ngFor="let item of [1,2,3,4,5]"></ion-icon>
+            <p class="text-rating">Rating</p>
+          </div>
+            <p class="rating-detail">{{ item.imdbRating }}</p>
+        </div>
+        <ion-card-title class="card-title card-title-d">{{ item.Title }} ({{ item.Year }})</ion-card-title>
+        <div class="movie-duration-genre">
+          <ion-icon name="time" color="warning" class="icon-size-13"></ion-icon>
+          <p class="duration-detail">{{ item.Runtime }}</p>
+            <div class="genre-btn-detail" *ngFor="let index of item.Genre.split(',')">
+              <label >
+                <span class="category-name">{{ index }}</span>
+              </label>
+            </div>
+        </div>
+        <div class="like">
+          <ion-icon id="like" name="heart-sharp" class="icon-size-30" (click)="favorites($event,item.imdbID)"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <div class="detail-body" id="detail-body">
+      <ion-card class="card-body-grids bg-dark">
+        <span class="color-abu">Plot :</span>
+        <p class="color-white icon-size-12">
+          {{ item.Plot }}
+        </p>
+      </ion-card>
+      <div class="background-second padding-10 box-about-movie">
+        <span class="color-abu">About Movie :</span>
+        <table class="table-about-movie color-abu icon-size-13">
+          <tbody>
+            <tr>
+              <td>Director</td>
+              <td>: {{ (item.Director) ? item.Director : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Writer</td>
+              <td>: {{ (item.Writer) ? item.Writer : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>: {{ (item.Language) ? item.Language : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>: {{ (item.Country) ? item.Country : '-' }}</td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td>: {{ (item.Type) ? item.Type : '-' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-bottom: 10px;"> 
+      <ion-row>
+        <span class="color-abu">Actor :</span>
+      </ion-row>
+      <div id="category" class="bg-dark">
+        <div class="category-body">
+          <div class="genre-btn-actor" *ngFor="let index of item.Actors.split(',')" >
+            <label>
+              <span class="category-name">{{ index }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+        <ion-row>
+          <h2 class="content-title">Recomendet</h2>
+        </ion-row>
+        <ion-row>
+          <ion-grid class="grid">
+            <ion-row>
+              <div *ngFor="let key of movieRecomend" style="display: contents;">
+                <ng-container *ngFor="let items of key">
+                  <ion-col size="4" *ngIf="items">
+                    <ng-container *ngIf="items.imdb != item.imdbID">
+                    <ion-card class="card-body-grid radius">
+                      <div class="rating-duration">
+                        <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+                        <span class="rating">{{ items.rating }}</span>
+                        <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+                        <span class="rating">{{ items.runtime }}</span>
+                      </div>
+                      <span class="mv-quality hd">{{ items.quality }} </span>
+                      <img src="{{ items.poster }}" alt="">
+                      <span class="movie-info">
+                        <ion-card-title class="card-title">{{ items.title }} ({{ items.year }})</ion-card-title>
+                      </span>
+                    </ion-card>   
+                  </ng-container>
+                  </ion-col>
+                </ng-container>
+            </div>
+            </ion-row>
+          </ion-grid>      
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>

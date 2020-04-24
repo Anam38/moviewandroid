@@ -1,7 +1,7 @@
 /*sass variables used*/
 
   .bg-img{
-    --background: url("../../../assets/img/background-orange.jpg") no-repeat 0 100%/cover fixed;
+    --background: url("../../../assets/img/download.jpg") no-repeat 0 100%/cover;
   }
   ion-toolbar {
   --background: transparent;
@@ -64,7 +64,7 @@ p a{
 input[type="text"],input[type="email"],input[type="password"]{
   width:100%;
   padding:12px 20px 12px 20px;
-  border-radius:30px;
+  border-radius:10px;
   box-shadow:inset 4px 6px 10px -4px rgba(0,0,0,0.3), 0 1px 1px -1px rgba(255,255,255,0.3);
 	background:rgba(0,0,0,0.2);
   @include disable;

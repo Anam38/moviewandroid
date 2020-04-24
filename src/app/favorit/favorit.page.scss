@@ -19,7 +19,7 @@ super-tabs-toolbar .active{
   color: #ffc372;
 }
 
-:host .buttons-container {
+:host :host .buttons-container {
   height: 30px;
 }
 .tabs {

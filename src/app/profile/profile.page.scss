@@ -33,6 +33,18 @@ super-tabs-toolbar super-tab-indicator{
   background-color: #ffc372 ;
 }
 
+ion-header{
+  height: 45px;
+}
+.header-md:after {
+  background-image: none;
+}
+.header-background{
+  --background: #222225;
+}
+.header-trans{
+  --background: transparent;
+}
 .card-title-d{
   top: 10px !important;
   font-size: 15px !important;
@@ -104,7 +116,7 @@ $size: 88px;
   .content {
     position: absolute;
     top: 0px; right: 0; left: 0;
-    background-color: #222225;
+    // background-color: #222225;
     color: #aaa;
     padding: 10px;
     margin-top: 0;
@@ -149,20 +161,20 @@ $size: 88px;
   
   .icon {
     padding: 10px;
-    background: linear-gradient(to right, #ffad64 0%, #ffad64 48% , #ffd47d 100%);
+    background: linear-gradient(to bottom right, #ffad64 0%, #ffad64 48% , #ffd47d 100%);
     color: #e0dfe1;
     min-width: 50px;
     text-align: center;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
   }
   
   .input-field {
     width: 100%;
     padding: 10px;
     outline: none;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
     border: 1px solid #ccc;
   }
   
@@ -171,8 +183,8 @@ $size: 88px;
   }
   /* Set a style for the submit button */
 .btn {
-    background: linear-gradient(to right, #ffad64 0%, #ffad64 48% , #ffd47d 100%);
-    color: white;
+    background: linear-gradient(to bottom right, #ffad64 0%, #ffad64 48% , #ffd47d 100%);
+    color: #20202a;
     padding: 15px 20px;
     border: none;
     cursor: pointer;
@@ -185,6 +197,7 @@ $size: 88px;
   }
 
   .btn-logout{
+    color: white;
     margin-top: 0px;
-    background: linear-gradient(to right, #333338 0%, #4a4a52 48%, #595961 100%);
+    background: linear-gradient(to bottom right, #333338 0%, #4a4a52 48%, #595961 100%);
   }

@@ -1,0 +1,46 @@
+<!-- header -->
+<ion-header id="header-detail-drama" class="without-statusbar">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content id="ion-content" (ionScroll)="onScroll($event)" [scrollEvents]="true">
+<div id="body" *ngFor="let item of dramaDetail">
+  <!-- <div id="video-play">
+    <iframe sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" id="frame-video" style="width: 100%; display: block;border: 0px;margin: 30px 0px;" allowfullscreen></iframe>
+    <div class="footer-video">
+      <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
+    </div>
+  </div> -->
+  <ion-card class="card-body-grids" id="drama-cards">
+    <img src="{{ item.poster }}" alt="">
+    <div class="btn-play" (click)="playvideo(item.player_url)">
+      <div class="play-movie">
+        <ion-icon name="caret-forward-circle-outline" class="icon-size-100"></ion-icon>
+      </div>
+      <div class="btn-trailer">
+        <ion-icon name="film-outline"></ion-icon>
+        <p>Trailer</p>
+      </div>
+    </div>
+    <div class="movie-info">
+      <div class="movie-rating">
+        <div>
+          <ion-icon name="star" color="warning" class="icon-size-15" *ngFor="let item of [1,2,3,4,5]"></ion-icon>
+          <p class="text-rating">Rating</p>
+        </div>
+          <p class="rating-detail"></p>
+      </div>
+      <ion-card-title class="card-title card-title-d">{{ item.title }}</ion-card-title>
+      <div class="movie-duration-genre">
+        <ion-icon name="time" color="warning" class="icon-size-13"></ion-icon>
+        <p class="duration-detail"></p>
+      </div>
+      <div class="like">
+        <ion-icon id="like" name="heart-sharp" class="icon-size-30" (click)="favorites($event,item.id)"></ion-icon>
+      </div>
+    </div>
+  </ion-card>
+</div>
+</ion-content>

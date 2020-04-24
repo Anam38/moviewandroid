@@ -1,0 +1,37 @@
+  ion-slides {
+      height: 100%;
+    }
+  ion-slide {
+   margin-bottom: 15px; 
+  }
+  .swiper-slide {
+    display: block;
+  }
+
+  .swiper-slide h2 {
+    margin-top: 2.8rem;
+  }
+
+  b {
+    font-weight: 500;
+  }
+
+  p b {
+    color: var(--ion-text-color, #000000);
+  }
+  .content{
+    margin-top: 0px;
+    padding: 0px 10px 5px;
+  }
+  .header-md:after {
+    background-image: none;
+  }
+  .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 0px;
+    left: 5px;
+    text-align: left;
+  }
+  .swiper-pagination-bullet-active {
+    background: #ffad64;
+  }
+  // slider

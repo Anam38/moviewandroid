@@ -1,0 +1,96 @@
+<!-- header -->
+<ion-header id="header" class="bg-dark">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/" class="color-default" (click)="dismissModal()"></ion-back-button>
+  </ion-buttons>
+</ion-header>
+
+<ion-content>
+<div id="body" *ngFor="let item of dataPlay">
+  <div id="video-play">
+    <iframe sandbox = "allow-forms allow-pointer-lock allow-same-origin allow-scripts allow-top-navigation" id="frame-video" [src]="video_play(item.player_url)" style="width: 100%; display: block;border: 0px;margin: 30px 0px;" allowfullscreen></iframe>
+    <div class="footer-video">
+      <h2 class="frame-title">{{ item.Title }} ({{ item.Year }})</h2>
+    </div>
+  </div>
+  <div class="detail-body" id="detail-body">
+    <ion-card class="card-body-grids bg-dark">
+      <span class="color-abu">Plot :</span>
+      <p class="color-white icon-size-12">
+        {{ item.Plot }}
+      </p>
+    </ion-card>
+    <div class="background-second padding-10 box-about-movie">
+      <span class="color-abu">About Movie :</span>
+      <table class="table-about-movie color-abu icon-size-13">
+        <tbody>
+          <tr>
+            <td>Director</td>
+            <td>: {{ (item.Director) ? item.Director : '-' }}</td>
+          </tr>
+          <tr>
+            <td>Writer</td>
+            <td>: {{ (item.Writer) ? item.Writer : '-' }}</td>
+          </tr>
+          <tr>
+            <td>Language</td>
+            <td>: {{ (item.Language) ? item.Language : '-' }}</td>
+          </tr>
+          <tr>
+            <td>Country</td>
+            <td>: {{ (item.Country) ? item.Country : '-' }}</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>: {{ (item.Type) ? item.Type : '-' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-bottom: 10px;"> 
+    <ion-row>
+      <span class="color-abu">Actor :</span>
+    </ion-row>
+    <div id="category" class="bg-dark">
+      <div class="category-body">
+        <div class="genre-btn-actor" *ngFor="let index of item.Actors.split(',')" >
+          <label>
+            <span class="category-name">{{ index }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+      <ion-row>
+        <h2 class="content-title">Recomendet</h2>
+      </ion-row>
+      <ion-row>
+        <ion-grid class="grid">
+          <ion-row>
+            <div *ngFor="let key of movieRecomend" style="display: contents;">
+              <ng-container *ngFor="let items of key">
+                <ion-col size="4" *ngIf="items">
+                  <ng-container *ngIf="items.imdb != item.imdbID">
+                  <ion-card class="card-body-grid radius">
+                    <div class="rating-duration">
+                      <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+                      <span class="rating">{{ items.rating }}</span>
+                      <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+                      <span class="rating">{{ items.runtime }}</span>
+                    </div>
+                    <span class="mv-quality hd">{{ items.quality }} </span>
+                    <img src="{{ items.poster }}" alt="">
+                    <span class="movie-info">
+                      <ion-card-title class="card-title">{{ items.title }} ({{ items.year }})</ion-card-title>
+                    </span>
+                  </ion-card>   
+                </ng-container>
+                </ion-col>
+              </ng-container>
+          </div>
+          </ion-row>
+        </ion-grid>      
+      </ion-row>
+    </div>
+  </div>
+</div>
+</ion-content>

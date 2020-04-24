@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 //PROVIDER
-import { ApiProviderService } from 'src/app/services/api/api-provider.service';
+import { ApiProviderService } from 'src/app/services/api/movie/api-provider.service';
 import { SearchItem, StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
 

@@ -13,7 +13,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../home/home.module').then(m => m.HomePageModule)
+              import('../movie/home/home.module').then(m => m.HomePageModule)
           }
         ]
       },
@@ -23,7 +23,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../drama/drama.module').then(m => m.DramaPageModule)
+              import('../drama/drama/drama.module').then(m => m.DramaPageModule)
           }
         ]
       },
@@ -33,7 +33,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('../anime/anime.module').then(m => m.AnimePageModule)
+              import('../anime/anime/anime.module').then(m => m.AnimePageModule)
           }
         ]
       },

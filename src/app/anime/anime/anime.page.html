@@ -1,0 +1,77 @@
+
+<ion-content [fullscreen]="true">
+  <!-- header -->
+  <ion-header [translucent]="true" class="header bg-dark without-statusbar">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" [ngStyle]="{'padding': '0'}">
+        </ion-col>
+        <ion-col size="8" [ngStyle]="{'padding': '0'}">
+          <span>
+            <input class="basic-slide" id="name" type="text" placeholder="Search Anime" />
+            <label for="name"><ion-icon name="search"></ion-icon></label>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-header>
+  <!-- end header -->
+  <div class="content">
+    <!-- loader -->
+    <div id="loader">
+      <div>
+      <ion-grid class="grid">
+        <ion-row>
+          <ion-col size="3" *ngFor="let key of [1,2,3,4]">
+            <div class="animate-loader" style="height: 35px;border-radius: 5px;"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 35%;"></div>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 10%;position: absolute;right: 10px;"></div>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" *ngFor="let key of [1,2,3]">
+            <div class="animate-large animate-loader"></div>
+            <div class="animate-quality animate-loader-small"></div>
+            <div class="animate-rating-duration animate-loader-small"></div>
+            <div class="animate-title animate-loader-small"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" *ngFor="let key of [1,2,3]">
+            <div class="animate-loader" style="height: 60px;border-radius: 5px;margin: 10px 0px;"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 35%;"></div>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 10%;position: absolute;right: 10px;"></div>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" *ngFor="let key of [1,2,3]">
+            <div class="animate-large animate-loader"></div>
+            <div class="animate-quality animate-loader-small"></div>
+            <div class="animate-rating-duration animate-loader-small"></div>
+            <div class="animate-title animate-loader-small"></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 35%;"></div>
+          <div class="animate-loader" style="height: 20px;border-radius: 5px;margin: 5px;width: 10%;position: absolute;right: 10px;"></div>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4" *ngFor="let key of [1,2,3,4,5,6,7,8,9]">
+            <div class="animate-large animate-loader"></div>
+            <div class="animate-quality animate-loader-small"></div>
+            <div class="animate-rating-duration animate-loader-small"></div>
+            <div class="animate-title animate-loader-small"></div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      </div>
+    </div>
+    <!-- end loader -->
+    <!-- content -->
+    <!-- end content -->
+  </div>
+</ion-content>

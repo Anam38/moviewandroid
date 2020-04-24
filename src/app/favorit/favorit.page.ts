@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { StorageService, FavoriteItem } from '../services/storage/storage.service';
 import { ToastController, AlertController, ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ApiProviderService } from '../services/api/api-provider.service';
+import { ApiProviderService } from '../services/api/movie/api-provider.service';
 
 // Declare jquery
 declare var $;

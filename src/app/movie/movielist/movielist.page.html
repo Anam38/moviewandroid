@@ -1,0 +1,84 @@
+<ion-header class="bg-dark without-statusbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" class="color-default"></ion-back-button>
+      <ion-title>{{ title }}</ion-title>
+    </ion-buttons>
+</ion-header>
+
+<ion-content color="yellow">
+<!-- content -->
+<div class="content">
+   <!-- refresh -->
+   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" class="ion-refresh">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <!-- content  -->
+  <!-- content category -->
+  <div id="category" class="bg-dark">
+    <div class="category-body">
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Action</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Romance</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Comedy</span>
+        </label>
+      </div>
+      <div class="category-btn">
+        <label >
+          <span class="category-name">Horor</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- loader -->
+  <div id="loaders">
+    <ion-row>
+      <ion-col size="4" *ngFor="let key of loaderCount">
+        <div class="animate-large animate-loader"></div>
+        <div class="animate-quality animate-loader-small"></div>
+        <div class="animate-rating-duration animate-loader-small"></div>
+        <div class="animate-title animate-loader-small"></div>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!--end loader -->
+  <!-- content body -->
+  <div id="movie-list">
+    <ion-grid class="grid">
+      <ion-row id="movie-list-contents">
+        <ion-col size="4" *ngFor="let item of data" (click)="movieDetail([item.title, item.imdb])">
+          <ion-card class="card-body-grid">
+            <div class="rating-duration">
+              <ion-icon name="star" color="warning" class="icon-size-11"></ion-icon>
+              <span class="rating">{{ (item.rating) ? item.rating : '-' }}</span>
+              <ion-icon name="time" color="warning" class="duration icon-size-11"></ion-icon>
+              <span class="rating">{{ (item.runtime) ? item.runtime : '-' }}</span>
+            </div>
+            <span class="mv-quality {{ item.quality.split(' ')[0].toLowerCase() }}">{{ item.quality.split(' ')[0] }}</span>
+            <img src="{{ item.poster }}" alt="">
+            <span class="movie-info">
+              <ion-card-title class="card-title">{{ item.title }} ({{ item.year }})</ion-card-title>
+            </span>
+          </ion-card>   
+        </ion-col>
+      </ion-row>
+    </ion-grid>      
+  </div>
+</div>
+<!-- end content -->
+  
+<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event,pages)" id="loadMovie">
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+
+</ion-content>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
 //PROVIDER
-import { ApiProviderService } from 'src/app/services/api/api-provider.service';
+import { ApiProviderService } from 'src/app/services/api/movie/api-provider.service';
 import { Router } from '@angular/router';
 
 // page

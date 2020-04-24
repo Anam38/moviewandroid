@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { StorageService, HistoryItem } from '../services/storage/storage.service';
+import { Component, ChangeDetectorRef } from '@angular/core';
+import { StorageService, HistoryItem, FavoriteItem } from '../services/storage/storage.service';
 import { ToastController, AlertController, ActionSheetController } from '@ionic/angular';
-import { ApiProviderService } from '../services/api/api-provider.service';
+import { ApiProviderService } from '../services/api/movie/api-provider.service';
 import { Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -19,14 +19,18 @@ declare var $;
 export class ProfilePage {
 
   HistoryItem :  HistoryItem[] = [];
+  favoriteItem :  FavoriteItem[] = [];
   
   ProfileImg : string;
   UserAuth : string;
+
+  showToolbar:boolean = false;
 
   constructor(
     public File: File,
     public router: Router,
     public camera : Camera,
+    public ref: ChangeDetectorRef,
     public apiprovider : ApiProviderService,
     public storageService : StorageService,
     public toastController: ToastController,
@@ -36,8 +40,20 @@ export class ProfilePage {
   ) {
     this.UserAuth = this.storageService.GetUserSession();
     this.getHistoryPaying();
+    this.getFavorite();
   }
   
+  onScroll($event: any){
+    let scrollTop = $event.detail.scrollTop;
+    var el = document.getElementById('headers');
+    
+     if(scrollTop > 0){
+      document.getElementById('headers').setAttribute("style", "--background: #222225;");
+    }else{
+      document.getElementById('headers').setAttribute("style", "--background: transparent;");
+     }
+  }
+
   // move to detail movie
   public movieDetail(param) {
       
@@ -81,6 +97,19 @@ export class ProfilePage {
     })
   }
   
+  // STORE SEARCH FUNCTION
+  // load data history searching
+  getFavorite(){
+    this.storageService.GetFavorite().then(items =>{
+      
+      this.favoriteItem = items;     
+      
+      setTimeout(function(){
+        document.getElementById('loading-favorite').setAttribute("style", "display:none;");
+      },500)
+    })
+  }
+
   // on press item
   onPress(movieId) {
     this.presentActionSheet(movieId);

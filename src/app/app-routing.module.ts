@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'more/:param',
-    loadChildren: () => import('./movielist/movielist.module').then( m => m.MovielistPageModule)
+    loadChildren: () => import('./movie/movielist/movielist.module').then( m => m.MovielistPageModule)
   },
   {
     path: 'movie/:movieId',
-    loadChildren: () => import('./moviewdetail/moviewdetail.module').then( m => m.MoviewdetailPageModule)
+    loadChildren: () => import('./movie/moviewdetail/moviewdetail.module').then( m => m.MoviewdetailPageModule)
   },
   {
     path: 'search',
@@ -34,7 +34,17 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./auth/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'play',
+    loadChildren: () => import('./modal/play/play.module').then( m => m.PlayPageModule)
+  },
+  {
+    path: 'drama/:dramaId',
+    loadChildren: () => import('./drama/dramadetail/dramadetail.module').then( m => m.DramadetailPageModule)
   }
+
+
 
 ];
 @NgModule({
